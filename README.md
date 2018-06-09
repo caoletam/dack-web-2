@@ -1,16 +1,16 @@
 # Information
 ## organization
   	Faculty of Information Technology - University of Science Ho Chi Minh City - Vietnam National University
-## lecturers
+## lecturer
   	Nguyễn Đức Huy
-## student
+## students
   	1560489 Cao Lê Tâm
   	1560528 Trần Thị Thắm
   	1560538 Võ Như Thiết
 ## subject
   	Web Programming 2
 ## project
-  	final project
+  	Final project
 
 # Organization
 	University of Science Ho Chi Minh City - Vietnam National University
