@@ -1,22 +1,22 @@
 # Information
 ## organization
-  Faculty of Information Technology - University of Science Ho Chi Minh City - Vietnam National University
+  	Faculty of Information Technology - University of Science Ho Chi Minh City - Vietnam National University
 ## lecturers
-  Nguyễn Đức Huy
+  	Nguyễn Đức Huy
 ## student
-  1560489 Cao Lê Tâm
-  1560528 Trần Thị Thắm
-  1560538 Võ Như Thiết
+  	1560489 Cao Lê Tâm
+  	1560528 Trần Thị Thắm
+  	1560538 Võ Như Thiết
 ## subject
-  Web Programming 2
+  	Web Programming 2
 ## project
-  final project
+  	final project
 
 # Organization
 	University of Science Ho Chi Minh City - Vietnam National University
 	Faculty of Information Technology
 
-# host config
+# Host config
 ## .htaccess config
     RewriteEngine On
     RewriteCond %{HTTPS} off
