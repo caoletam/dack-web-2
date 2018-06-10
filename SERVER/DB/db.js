@@ -43,7 +43,6 @@ exports.load = function(sql) {
 		}
 		cn.end();
     });
-    console.log(d.promise);
     return d.promise;
 }
 
