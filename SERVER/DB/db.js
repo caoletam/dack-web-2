@@ -1,26 +1,18 @@
 var pg = require('pg'),
 	q = require('q');
 
-// const _HOST = '127.0.0.1',
-// 	_PORT = '9999',
-// 	_USER = 'postgres',
-// 	_PWD = '123456',
-// 	_DB = 'QLBH';
+const _HOST = '127.0.0.1',
+	_PORT = '9999',
+	_USER = 'postgres',
+	_PWD = '123456',
+	_DB = 'QLDG';
 
 
-var conString = "postgres://postgres:123456@localhost:9999/QLBH";
+var conString = "postgres://"+_USER+":"+_PWD+"@"+_HOST+":"+_PORT+"/"+_DB;
 
 exports.load = function (sql) {
 	var d = q.defer();
 	var cn = new pg.Client(conString);
-
-	// var cn = pg.createConnection({
-	// 	host: _HOST,
-	// 	port: _PORT,
-	// 	user: _USER,
-	// 	password: _PWD,
-	// 	database: _DB
-	// });
 
 	cn.connect();
 	cn.query(sql, function (error, rows, fields) {
@@ -32,79 +24,61 @@ exports.load = function (sql) {
 
 		cn.end();
 	});
-
+    console.log(d.promise);
 	return d.promise;
 }
 
-// exports.load = function(sql, fn) {
+exports.load = function(sql) {
+	var d = q.defer();
+	var cn = new pg.Client(conString);
 
-//     var cn = mysql.createConnection({
-// 		host: _HOST,
-// 		port: _PORT,
-// 		user: _USER,
-// 		password: _PWD,
-// 		database: _DB
-// 	});
+	cn.connect();
+	cn.query(sql, function (error, rows, fields) {
+		if (error) {
+			console.log(error);
+		} else {
+            // console.log(rows);
+            d.resolve(rows);
+			// fn(rows);
+		}
+		cn.end();
+    });
+    console.log(d.promise);
+    return d.promise;
+}
 
-// 	cn.connect();
-// 	cn.query(sql, function (error, rows, fields) {
-// 		if (error) {
-// 			console.log(error);
-// 		} else {
-// 			// console.log(rows);
-// 			fn(rows);
-// 		}
+exports.insert = function (sql) {
+    var d = q.defer();
+	var cn = new pg.Client(conString);
 
-// 		cn.end();
-// 	});
-// }
+	cn.connect();
+	cn.query(sql, function (error, value) {
+		if (error) {
+			d.reject(error);
+		} else {
+            console.log(value);
+			d.resolve(value.insertId);
+		}
 
-// exports.insert = function (sql) {
-// 	var d = q.defer();
-	
-// 	var cn = mysql.createConnection({
-// 		host: _HOST,
-// 		port: _PORT,
-// 		user: _USER,
-// 		password: _PWD,
-// 		database: _DB
-// 	});
+		cn.end();
+	});
+	return d.promise;	
+}
 
-// 	cn.connect();
-// 	cn.query(sql, function (error, value) {
-// 		if (error) {
-// 			d.reject(error);
-// 		} else {
-// 			d.resolve(value.insertId);
-// 		}
+exports.delete = function (sql) {
+	var d = q.defer();
+    var cn = new pg.Client(conString);
 
-// 		cn.end();
-// 	});
+	cn.connect();
+	cn.query(sql, function (error, value) {
+		if (error) {
+			d.reject(error);
+		} else {
+			d.resolve(value.rowCount);
+		}
 
-// 	return d.promise;	
-// }
+		cn.end();
+	});
 
-// exports.delete = function (sql) {
-// 	var d = q.defer();
-	
-// 	var cn = mysql.createConnection({
-// 		host: _HOST,
-// 		port: _PORT,
-// 		user: _USER,
-// 		password: _PWD,
-// 		database: _DB
-// 	});
-
-// 	cn.connect();
-// 	cn.query(sql, function (error, value) {
-// 		if (error) {
-// 			d.reject(error);
-// 		} else {
-// 			d.resolve(value.affectedRows);
-// 		}
-
-// 		cn.end();
-// 	});
-
-// 	return d.promise;	
-// }
+	return d.promise;	
+}
