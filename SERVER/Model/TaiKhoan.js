@@ -1,5 +1,5 @@
-var db = require('../DB/db'),
-    bcrypt = require('bcrypt-nodejs');
+var db = require('../DB/db');
+const bcrypt = require('bcrypt-nodejs');
 
 exports.loadAll = function() {
 	var sql = 'select * from taikhoan';
