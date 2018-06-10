@@ -4,9 +4,8 @@ var SanPham = require('../Model/SanPham');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    SanPham.loadAll().then(rows => {
-        console.log(typeof rows);
-        res.json(rows);
+    SanPham.loadAll().then(data => {
+        res.json(data.rows);
     }).catch(err => {
         console.log(err);
         res.statusCode = 500;
@@ -25,10 +24,9 @@ router.get('/:id', (req, res) => {
 			res.end();
 			return;
 		}
-		SanPham.load(id).then(rows => {
-            console.log(Object.keys(rows).length);
-			if (Object.keys(rows).length > 0) {
-				res.json(rows);
+		SanPham.load(id).then(data => {
+			if (Object.keys(data).length > 0) {
+				res.json(data.rows);
 			} else {
 				res.statusCode = 204;
 				res.end();
@@ -46,16 +44,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
 	SanPham.add(req.body)
-		.then(insertId => {
-			var poco = {
-                masanpham: insertId,
-                tensanpham: req.body.tensanpham,
-                maloaisanpham: req.body.maloaisanpham,
-                dacta: req.body.dacta,
-                hinhdaidien: req.body.hinhdaidien
-            };
+		.then(data => {
 			res.statusCode = 201;
-			res.json(poco);
+			res.json(data.rows);
 		})
 		.catch(err => {
 			console.log(err);
@@ -76,11 +67,8 @@ router.delete('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.delete(id).then(rowCount => {
-			res.json({
-                "affectedRow": rowCount,
-                "id": id
-			});
+		SanPham.delete(id).then(data => {
+			res.json(data);
 		}).catch(err => {
 			console.log(err);
 			res.statusCode = 500;
@@ -102,16 +90,9 @@ router.post('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.update(id, req.body).then(updateId => {
-            var poco = {
-                masanpham: updateId,
-                tensanpham: req.body.tensanpham,
-                maloaisanpham: req.body.maloaisanpham,
-                dacta: req.body.dacta,
-                hinhdaidien: req.body.hinhdaidien
-            };
+		SanPham.update(id, req.body).then(data => {
 			res.statusCode = 201;
-			res.json(poco);
+			res.json(data.rows);
 		}).catch(err => {
 			console.log(err);
 			res.statusCode = 500;
