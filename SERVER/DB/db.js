@@ -56,7 +56,7 @@ exports.insert = function (sql) {
 		if (error) {
 			d.reject(error);
 		} else {
-			d.resolve(value.rows[0]);
+			d.resolve(value);
 		}
 
 		cn.end();
@@ -91,7 +91,7 @@ exports.update = function (sql){
 		if (error) {
 			d.reject(error);
 		} else {
-			d.resolve(value.rows[0]);
+			d.resolve(value);
 		}
 
 		cn.end();
