@@ -19,3 +19,8 @@ exports.delete = function(id) {
 	var sql = `delete from sanpham where masanpham = ${id} RETURNING *`;
 	return db.delete(sql);
 }
+
+exports.update = function(id, poco) {
+	var sql = `update sanpham set tensanpham = '${poco.tensanpham}', maloaisanpham = '${poco.maloaisanpham}', dacta = '${poco.dacta}', hinhdaidien = '${poco.hinhdaidien}' where masanpham = ${id} RETURNING *`;
+	return db.update(sql);
+}

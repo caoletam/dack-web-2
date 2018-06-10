@@ -92,4 +92,35 @@ router.delete('/:id', (req, res) => {
 	}
 });
 
+router.post('/:id', (req, res) => {
+	if (req.params.id) {
+		var id = req.params.id;
+
+		if (isNaN(id)) {
+			res.statusCode = 400;
+			res.end();
+			return;
+		}
+
+		SanPham.update(id, req.body).then(updateId => {
+            var poco = {
+                masanpham: updateId,
+                tensanpham: req.body.tensanpham,
+                maloaisanpham: req.body.maloaisanpham,
+                dacta: req.body.dacta,
+                hinhdaidien: req.body.hinhdaidien
+            };
+			res.statusCode = 201;
+			res.json(poco);
+		}).catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.json('error');
+		});
+	} else {
+		res.statusCode = 400;
+		res.json('error');
+	}
+});
+
 module.exports = router;

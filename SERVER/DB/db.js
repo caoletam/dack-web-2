@@ -82,3 +82,21 @@ exports.delete = function (sql) {
 
 	return d.promise;	
 }
+
+exports.update = function (sql){
+    var d = q.defer();
+    var cn = new pg.Client(conString);
+
+	cn.connect();
+	cn.query(sql, function (error, value) {
+		if (error) {
+			d.reject(error);
+		} else {
+			d.resolve(value.rows[0].masanpham);
+		}
+
+		cn.end();
+	});
+
+	return d.promise;
+}
