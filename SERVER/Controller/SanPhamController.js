@@ -48,13 +48,12 @@ router.post('/', (req, res) => {
 	SanPham.add(req.body)
 		.then(insertId => {
 			var poco = {
-                // masanpham: insertId,
+                masanpham: insertId,
                 tensanpham: req.body.tensanpham,
                 maloaisanpham: req.body.maloaisanpham,
                 dacta: req.body.dacta,
                 hinhdaidien: req.body.hinhdaidien
             };
-            console.log(poco);
 			res.statusCode = 201;
 			res.json(poco);
 		})
