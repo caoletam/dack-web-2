@@ -56,8 +56,8 @@ exports.insert = function (sql) {
 		if (error) {
 			d.reject(error);
 		} else {
-            console.log(value);
-			d.resolve(value.insertId);
+            console.log("New ID: " + value.rows[0].masanpham);
+			d.resolve(value.rows[0].masanpham);
 		}
 
 		cn.end();
