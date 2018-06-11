@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+require_once('admin.php');
+
 
 Route::get('/', function () {
     return view('welcome');
