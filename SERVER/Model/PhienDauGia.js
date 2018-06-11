@@ -21,6 +21,6 @@ exports.delete = function(id) {
 }
 
 exports.update = function(id, poco) {
-	var sql = `update phiendaugia set tentinhtrang = '${poco.tentinhtrang}' where maphiendaugia = ${id} RETURNING *`;
+	var sql = `update phiendaugia set masanpham = '${poco.masanpham}',thoigiandau = '${poco.thoigiandau}',giathapnhat = '${poco.giathapnhat}',giahientai = '${poco.giahientai}',maphieuthang = '${poco.maphieuthang}',matinhtrangphiendaugia = '${poco.matinhtrangphiendaugia}' where maphiendaugia = ${id} RETURNING *`;
 	return db.update(sql);
 }
