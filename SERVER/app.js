@@ -10,6 +10,8 @@ var HinhController = require('./Controller/HinhController');
 var LoaiTaiKhoanController = require('./Controller/LoaiTaiKhoanController');
 var TaiKhoanController = require('./Controller/TaiKhoanController');
 var TinhTrangPhieuDauGiaController = require('./Controller/TinhTrangPhieuDauGiaController');
+var TinhTrangPhienDauGiaController = require('./Controller/TinhTrangPhienDauGiaController');
+var PhienDauGiaController = require('./Controller/PhienDauGiaController');
 
 var app = express();
 
@@ -32,6 +34,8 @@ app.use('/hinh', HinhController);
 app.use('/loaitaikhoan', LoaiTaiKhoanController);
 app.use('/taikhoan', TaiKhoanController);
 app.use('/tinhtrangphieudaugia', TinhTrangPhieuDauGiaController);
+app.use('/tinhtrangphiendaugia', TinhTrangPhienDauGiaController);
+app.use('/phiendaugia', PhienDauGiaController);
 
 app.listen(3000, () => {
 	console.log('API running on port 3000');
