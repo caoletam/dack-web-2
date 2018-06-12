@@ -44,7 +44,18 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
 	SanPham.add(req.body)
+<<<<<<< HEAD
 		.then(data => {
+=======
+		.then(insertId => {
+			var poco = {
+                masanpham: insertId,
+                tensanpham: req.body.tensanpham,
+                maloaisanpham: req.body.maloaisanpham,
+                dacta: req.body.dacta,
+                hinhdaidien: req.body.hinhdaidien
+            };
+>>>>>>> 9b2b0fe0fee8ded6e0d2155d0f8753f8868d2fd3
 			res.statusCode = 201;
 			res.json(data.rows);
 		})
