@@ -14,6 +14,13 @@ var TinhTrangPhienDauGiaController = require('./Controller/TinhTrangPhienDauGiaC
 var PhienDauGiaController = require('./Controller/PhienDauGiaController');
 var PhieuDauGiaController = require('./Controller/PhieuDauGiaController');
 
+
+// TaiKhoanController
+// var KiemTraDangNhap = require('./Controller/TaiKhoanController');
+
+
+// 
+
 var app = express();
 
 app.use(morgan('dev'));
@@ -38,6 +45,9 @@ app.use('/tinhtrangphieudaugia', TinhTrangPhieuDauGiaController);
 app.use('/tinhtrangphiendaugia', TinhTrangPhienDauGiaController);
 app.use('/phiendaugia', PhienDauGiaController);
 app.use('/phieudaugia', PhieuDauGiaController);
+
+//  USE TAI KHOAN
+// app.use('/kiemtradangnhap', KiemTraDangNhap);
 
 app.listen(3000, () => {
 	console.log('API running on port 3000');
