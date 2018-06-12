@@ -1,10 +1,10 @@
 var express = require('express');
-var SanPham = require('../Model/SanPham');
+var LoaiSanPham = require('../Model/LoaiSanPham');
 
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    SanPham.loadAll().then(data => {
+    LoaiSanPham.loadAll().then(data => {
         res.json(data.rows);
     }).catch(err => {
         console.log(err);
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 			res.end();
 			return;
 		}
-		SanPham.load(id).then(data => {
+		LoaiSanPham.load(id).then(data => {
 			if (Object.keys(data).length > 0) {
 				res.json(data.rows);
 			} else {
@@ -43,19 +43,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	SanPham.add(req.body)
-<<<<<<< HEAD
+    LoaiSanPham.add(req.body)
 		.then(data => {
-=======
-		.then(insertId => {
-			var poco = {
-                masanpham: insertId,
-                tensanpham: req.body.tensanpham,
-                maloaisanpham: req.body.maloaisanpham,
-                dacta: req.body.dacta,
-                hinhdaidien: req.body.hinhdaidien
-            };
->>>>>>> 9b2b0fe0fee8ded6e0d2155d0f8753f8868d2fd3
 			res.statusCode = 201;
 			res.json(data.rows);
 		})
@@ -78,8 +67,11 @@ router.delete('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.delete(id).then(data => {
-			res.json(data);
+		LoaiSanPham.delete(id).then(rowCount => {
+			res.json({
+                "affectedRow": rowCount,
+                "id": id
+			});
 		}).catch(err => {
 			console.log(err);
 			res.statusCode = 500;
@@ -101,7 +93,7 @@ router.post('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.update(id, req.body).then(data => {
+		LoaiSanPham.update(id, req.body).then(data => {
 			res.statusCode = 201;
 			res.json(data.rows);
 		}).catch(err => {

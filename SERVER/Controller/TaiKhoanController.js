@@ -1,10 +1,57 @@
 var express = require('express');
-var SanPham = require('../Model/SanPham');
+var TaiKhoan = require('../Model/TaiKhoan');
+const bcrypt = require('bcrypt-nodejs');
+var passwordHashed = require('password-hash');
 
 var router = express.Router();
 
+
+
+
+router.post('/kiemtradangnhap', (req, res) => {
+	TaiKhoan.loadAll().then(data => {
+		// bcrypt.compare(guess, stored_hash, function(err, res) {
+		
+		// });
+		console.log(req.body);
+		data.rows.forEach(element => {
+			// console.log(passwordHashed.verify(element.matkhau, req.body.txtPassword)); // false
+			// console.log('\n');
+			if (element.maloaitaikhoan.toString().trim() === 2){
+				if (element.email.toString().trim() === req.body.txtEmail){
+					// bcrypt.compare(req.body.txtPassword, element.matkhau, function(err, resb) {
+					// 	if(resb) {
+					// 		// checkLogin = 1;
+					// 		console.log(element.tenhienthi + ' khớp');
+					// 		console.log(res);
+					// 		// console.log(checkLogin);
+					// 	} else {
+					// 		// console.log(checkLogin);
+					// 		console.log(element.tenhienthi + ' không khớp');
+					// 	} 
+					// });
+					var match = bcrypt.compareSync(req.body.txtPassword, element.matkhau);
+					// if (match == true){
+					// 	checkLogin = 1;
+					// }
+					if(match===true){
+						res.end('1');
+					}
+				}
+			}
+			// res.end('0');
+		});
+		res.end('0');
+	}).catch(err=>{
+		res.end('Lỗi rồi');
+	});
+	
+    
+});
+
 router.get('/', (req, res) => {
-    SanPham.loadAll().then(data => {
+	console.log('a');
+    TaiKhoan.loadAll().then(data => {
         res.json(data.rows);
     }).catch(err => {
         console.log(err);
@@ -24,7 +71,7 @@ router.get('/:id', (req, res) => {
 			res.end();
 			return;
 		}
-		SanPham.load(id).then(data => {
+		TaiKhoan.load(id).then(data => {
 			if (Object.keys(data).length > 0) {
 				res.json(data.rows);
 			} else {
@@ -43,19 +90,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	SanPham.add(req.body)
-<<<<<<< HEAD
+	TaiKhoan.add(req.body)
 		.then(data => {
-=======
-		.then(insertId => {
-			var poco = {
-                masanpham: insertId,
-                tensanpham: req.body.tensanpham,
-                maloaisanpham: req.body.maloaisanpham,
-                dacta: req.body.dacta,
-                hinhdaidien: req.body.hinhdaidien
-            };
->>>>>>> 9b2b0fe0fee8ded6e0d2155d0f8753f8868d2fd3
 			res.statusCode = 201;
 			res.json(data.rows);
 		})
@@ -78,7 +114,7 @@ router.delete('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.delete(id).then(data => {
+		TaiKhoan.delete(id).then(data => {
 			res.json(data);
 		}).catch(err => {
 			console.log(err);
@@ -101,7 +137,7 @@ router.post('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.update(id, req.body).then(data => {
+		TaiKhoan.update(id, req.body).then(data => {
 			res.statusCode = 201;
 			res.json(data.rows);
 		}).catch(err => {
@@ -114,5 +150,6 @@ router.post('/:id', (req, res) => {
 		res.json('error');
 	}
 });
+
 
 module.exports = router;
