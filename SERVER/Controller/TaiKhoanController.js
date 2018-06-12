@@ -13,10 +13,11 @@ router.post('/kiemtradangnhap', (req, res) => {
 		// bcrypt.compare(guess, stored_hash, function(err, res) {
 		
 		// });
-		const checkLogin = 0;
+		console.log(req.body);
 		data.rows.forEach(element => {
 			// console.log(passwordHashed.verify(element.matkhau, req.body.txtPassword)); // false
 			// console.log('\n');
+			
 			if (element.email.toString().trim() === req.body.txtEmail){
 				// bcrypt.compare(req.body.txtPassword, element.matkhau, function(err, resb) {
 				// 	if(resb) {
