@@ -13,24 +13,33 @@ router.post('/kiemtradangnhap', (req, res) => {
 		// bcrypt.compare(guess, stored_hash, function(err, res) {
 		
 		// });
-		var checkLogin = 0;
+		const checkLogin = 0;
 		data.rows.forEach(element => {
 			// console.log(passwordHashed.verify(element.matkhau, req.body.txtPassword)); // false
 			// console.log('\n');
 			if (element.email.toString().trim() === req.body.txtEmail){
-				bcrypt.compare(req.body.txtPassword, element.matkhau, function(err, res) {
-					if(res) {
-						checkLogin = 1;
-						// console.log(element.tenhienthi + ' khớp');
-						// console.log(checkLogin);
-					} else {
-						// console.log(checkLogin);
-						console.log(element.tenhienthi + ' không khớp');
-					} 
-				});
+				// bcrypt.compare(req.body.txtPassword, element.matkhau, function(err, resb) {
+				// 	if(resb) {
+				// 		// checkLogin = 1;
+				// 		console.log(element.tenhienthi + ' khớp');
+				// 		console.log(res);
+				// 		// console.log(checkLogin);
+				// 	} else {
+				// 		// console.log(checkLogin);
+				// 		console.log(element.tenhienthi + ' không khớp');
+				// 	} 
+				// });
+				var match = bcrypt.compareSync(req.body.txtPassword, element.matkhau);
+				// if (match == true){
+				// 	checkLogin = 1;
+				// }
+				if(match===true){
+					res.end('1');
+				}
 			}
+			// res.end('0');
 		});
-		res.end('xong');
+		res.end('0');
 	}).catch(err=>{
 		res.end('Lỗi rồi');
 	});
