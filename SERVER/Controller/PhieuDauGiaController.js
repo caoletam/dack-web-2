@@ -1,10 +1,10 @@
 var express = require('express');
-var SanPham = require('../Model/SanPham');
+var PhieuDauGia = require('../Model/PhieuDauGia');
 
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    SanPham.loadAll().then(data => {
+    PhieuDauGia.loadAll().then(data => {
         res.json(data.rows);
     }).catch(err => {
         console.log(err);
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 			res.end();
 			return;
 		}
-		SanPham.load(id).then(data => {
+		PhieuDauGia.load(id).then(data => {
 			if (Object.keys(data).length > 0) {
 				res.json(data.rows);
 			} else {
@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	SanPham.add(req.body)
+	PhieuDauGia.add(req.body)
 		.then(data => {
 			res.statusCode = 201;
 			res.json(data.rows);
@@ -67,7 +67,7 @@ router.delete('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.delete(id).then(data => {
+		PhieuDauGia.delete(id).then(data => {
 			res.json(data);
 		}).catch(err => {
 			console.log(err);
@@ -90,7 +90,7 @@ router.post('/:id', (req, res) => {
 			return;
 		}
 
-		SanPham.update(id, req.body).then(data => {
+		PhieuDauGia.update(id, req.body).then(data => {
 			res.statusCode = 201;
 			res.json(data.rows);
 		}).catch(err => {
