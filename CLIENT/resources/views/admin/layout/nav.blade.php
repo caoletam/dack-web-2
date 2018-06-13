@@ -57,7 +57,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Trang cá nhân</a>
                                     <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-                                    <a class="dropdown-item" href="#">Đăng xuất</a>
+                                    <a class="dropdown-item" href="{{route('logout')}}">Đăng xuất</a>
                                 </div>
                             </li>
                         </ul>

@@ -102,7 +102,7 @@
                         <br>
                         <br>
                         
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
                                     <h4 class="card-title ">Danh sách loại tài khoản</h4>
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

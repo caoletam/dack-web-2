@@ -58,10 +58,9 @@
                                     <div class="form-group">
                                         <label for="cbType">Loại tài khoản</label>
                                         <select class="form-control" id="cbType" name="cbType">
-                                            <option value="volvo">Volvo</option>
-                                              <option value="saab">Saab</option>
-                                              <option value="mercedes">Mercedes</option>
-                                              <option value="audi">Audi</option>
+                                            @foreach($result_decode_type_of_user as $rs_type)
+                                            <option value="{{$rs_type->maloaitaikhoan}}">{{$rs_type->tenloaitaikhoan}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
