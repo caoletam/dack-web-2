@@ -100,7 +100,7 @@ class ImageController extends Controller
     		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
     		$result = curl_exec($ch);
     		curl_close($ch);
-    		return redirect('admin/product');
+    		return redirect('admin/image');
     	}
     }
 }

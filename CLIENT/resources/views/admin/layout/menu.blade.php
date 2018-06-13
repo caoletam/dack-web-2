@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../examples/table.html">
+                        <a class="nav-link" href="{{route('parameter')}}">
                             <i class="material-icons">content_paste</i>
                             <p>Tham số</p>
                         </a>
