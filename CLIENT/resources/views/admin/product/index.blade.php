@@ -82,7 +82,7 @@
                                                         {{$rs_product->dacta}}
                                                     </td>
                                                     <td>
-                                                        {{$rs_product->hinhdaidien}}
+                                                        <img style="height: 110px; width: 110px; background-image:url({{$rs_product->hinhdaidien}});background-size: 100%;" src="{{$rs_product->hinhdaidien}}">
                                                     </td>
                                                     <td style="padding-right: 0px; width: 10px;">
                                                         <form action="{{route('product_edit',$rs_product->masanpham)}}" method="get">
