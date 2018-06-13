@@ -7,46 +7,24 @@ var router = express.Router();
 
 
 
-
+// KIEM TRA LOGIN
 router.post('/kiemtradangnhap', (req, res) => {
 	TaiKhoan.loadAll().then(data => {
-		// bcrypt.compare(guess, stored_hash, function(err, res) {
-		
-		// });
 		console.log(req.body);
 		data.rows.forEach(element => {
-			// console.log(passwordHashed.verify(element.matkhau, req.body.txtPassword)); // false
-			// console.log('\n');
-			if (element.maloaitaikhoan.toString().trim() === 2){
+			if (element.maloaitaikhoan === 2){
 				if (element.email.toString().trim() === req.body.txtEmail){
-					// bcrypt.compare(req.body.txtPassword, element.matkhau, function(err, resb) {
-					// 	if(resb) {
-					// 		// checkLogin = 1;
-					// 		console.log(element.tenhienthi + ' khớp');
-					// 		console.log(res);
-					// 		// console.log(checkLogin);
-					// 	} else {
-					// 		// console.log(checkLogin);
-					// 		console.log(element.tenhienthi + ' không khớp');
-					// 	} 
-					// });
 					var match = bcrypt.compareSync(req.body.txtPassword, element.matkhau);
-					// if (match == true){
-					// 	checkLogin = 1;
-					// }
 					if(match===true){
 						res.end('1');
 					}
 				}
 			}
-			// res.end('0');
 		});
 		res.end('0');
 	}).catch(err=>{
 		res.end('Lỗi rồi');
 	});
-	
-    
 });
 
 router.get('/', (req, res) => {

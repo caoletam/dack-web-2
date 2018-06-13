@@ -7,13 +7,13 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item active ">
-                        <a class="nav-link" href="../examples/dashboard.html">
+                        <a class="nav-link" href="{{route('dashboard')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Bảng điều khiển</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../examples/user.html">
+                        <a class="nav-link" href="{{route('user')}}">
                             <i class="material-icons">person</i>
                             <p>Tài khoản</p>
                         </a>
