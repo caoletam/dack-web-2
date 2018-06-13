@@ -29,6 +29,28 @@ Route::group(['prefix'=>'admin'],function(){
 		
 	});
 
+	Route::group(['prefix'=>'parameter'],function(){
+		Route::get('/',				'ParameterController@index')			->name('parameter');
+		Route::get('/add',			'ParameterController@create')			->name('parameter_add');
+		Route::post('/add',			'ParameterController@create');
+		Route::get('/edit/{id}',	'ParameterController@update')->where('id','[0-9]+')->name('parameter_edit');
+		Route::post('/edit/{id}',	'ParameterController@update')->where('id','[0-9]+');
+		Route::get('/delete/{id}',	'ParameterController@delete')->where('id','[0-9]+')->name('parameter_delete');
+		Route::post('/delete/{id}',	'ParameterController@delete')->where('id','[0-9]+');
+		
+	});
+
+	Route::group(['prefix'=>'image'],function(){
+		Route::get('/',				'ImageController@index')			->name('image');
+		Route::get('/add',			'ImageController@create')			->name('image_add');
+		Route::post('/add',			'ImageController@create');
+		Route::get('/edit/{id}',	'ImageController@update')->where('id','[0-9]+')->name('image_edit');
+		Route::post('/edit/{id}',	'ImageController@update')->where('id','[0-9]+');
+		Route::get('/delete/{id}',	'ImageController@delete')->where('id','[0-9]+')->name('image_delete');
+		Route::post('/delete/{id}',	'ImageController@delete')->where('id','[0-9]+');
+		
+	});
+
 });
 
 

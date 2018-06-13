@@ -80,7 +80,7 @@ router.delete('/:id', (req, res) => {
 	}
 });
 
-router.post('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
 	if (req.params.id) {
 		var id = req.params.id;
 

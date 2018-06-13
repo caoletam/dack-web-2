@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-4" >
-                                    <a href="{{route('product-add')}}" class="btn btn-success btn-block" role="button">Thêm sản phẩm mới</a>
+                                    <a href="{{route('image_add')}}" class="btn btn-success btn-block" role="button">Thêm hình mới</a>
                                 </div>
                                 <div class="col-md-8">
                                     <form class="navbar-form">
@@ -33,7 +33,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title ">Danh sách sản phẩm</h4>
+                                    <h4 class="card-title ">Danh sách hình</h4>
                                     <p class="card-category"> Tất cả</p>
                                 </div>
                                 <div class="card-body">
@@ -44,16 +44,13 @@
                                                     #
                                                 </th>
                                                 <th>
-                                                    Tên sản phẩm
+                                                    Sản phẩm
                                                 </th>
                                                 <th>
-                                                    Loại sản phẩm
+                                                    Đường dẫn
                                                 </th>
                                                 <th>
-                                                    Đặc tả
-                                                </th>
-                                                <th>
-                                                    Hình đại diện
+                                                    Hình
                                                 </th>
                                                 <th>
                                                     &nbsp;
@@ -63,35 +60,32 @@
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                @foreach($result_decode_product as $key => $rs_product)
+                                                @foreach($result_decode_image as $key => $rs_image)
                                                 <tr>
                                                     <td>
-                                                        {{$rs_product->masanpham}}
+                                                        {{$rs_image->mahinh}}
                                                     </td>
                                                     <td>
+                                                        @foreach($result_decode_product as $key => $rs_product)
+                                                        @if($rs_image->masanpham==$rs_product->masanpham)
                                                         {{$rs_product->tensanpham}}
-                                                    </td>
-                                                    <td>
-                                                        @foreach($result_decode_type_of_product as $key => $rs_type_of_product)
-                                                        @if($rs_product->maloaisanpham==$rs_type_of_product->maloaisanpham)
-                                                        {{$rs_type_of_product->tenloaisanpham}}
                                                         @endif
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        {{$rs_product->dacta}}
+                                                        {{$rs_image->duongdan}}
                                                     </td>
                                                     <td>
-                                                        <img style="height: 110px; width: 110px; background-image:url({{$rs_product->hinhdaidien}});background-size: 100%;">
+                                                        <img style="height: 110px; width: 110px; background-image:url({{$rs_image->duongdan}});background-size: 100%;">
                                                     </td>
                                                     <td style="padding-right: 0px; width: 10px;">
-                                                        <form action="{{route('product_edit',$rs_product->masanpham)}}" method="get">
+                                                        <form action="{{route('image_edit',$rs_image->mahinh)}}" method="get">
                                                             {{ csrf_field() }}
                                                             <button class="btn btn-warning btn-edit">Sửa</button>
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <form action="{{route('product_delete',$rs_product->masanpham)}}" method="post">
+                                                        <form action="{{route('image_delete',$rs_image->mahinh)}}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" value="" name="txtDeleteID">
                                                             <button class="btn btn-danger btn-xs btn-delete">Xóa</button>
