@@ -19,9 +19,15 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../examples/typography.html">
+                        <a class="nav-link" href="{{route('product')}}">
                             <i class="material-icons">library_books</i>
                             <p>Sản phẩm</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../examples/typography.html">
+                            <i class="material-icons">library_books</i>
+                            <p>Hình</p>
                         </a>
                     </li>
                     <li class="nav-item ">

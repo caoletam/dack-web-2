@@ -18,6 +18,17 @@ Route::group(['prefix'=>'admin'],function(){
 		
 	});
 
+	Route::group(['prefix'=>'product'],function(){
+		Route::get('/',				'ProductController@index')			->name('product');
+		Route::get('/add',			'ProductController@create')			->name('product-add');
+		Route::post('/add',			'ProductController@create');
+		Route::get('/edit/{id}',	'ProductController@update')->where('id','[0-9]+')->name('product_edit');
+		Route::post('/edit/{id}',	'ProductController@update')->where('id','[0-9]+');
+		Route::get('/delete/{id}',	'ProductController@delete')->where('id','[0-9]+')->name('product_delete');
+		Route::post('/delete/{id}',	'ProductController@delete')->where('id','[0-9]+');
+		
+	});
+
 });
 
 
