@@ -11,7 +11,7 @@ exports.load = function(id) {
 }
 
 exports.add = function(poco) {
-	var sql = `insert into sanpham(tensanpham,maloaisanpham,dacta,hinhdaidien) values('${poco.tensanpham}','${poco.maloaisanpham}','${poco.dacta}','${poco.hinhdaidien}') RETURNING *`;
+	var sql = `insert into sanpham(tensanpham,maloaisanpham,dacta,hinhdaidien) values('${poco.tensanpham}','${poco.maloaisanpham}','${poco.dacta}','${poco.hinhdaidien}',${poco.tinhtrang}) RETURNING *`;
 	return db.insert(sql);
 }
 
@@ -21,6 +21,6 @@ exports.delete = function(id) {
 }
 
 exports.update = function(id, poco) {
-	var sql = `update sanpham set tensanpham = '${poco.tensanpham}', maloaisanpham = '${poco.maloaisanpham}', dacta = '${poco.dacta}', hinhdaidien = '${poco.hinhdaidien}' where masanpham = ${id} RETURNING *`;
+	var sql = `update sanpham set tensanpham = '${poco.tensanpham}', maloaisanpham = '${poco.maloaisanpham}', dacta = '${poco.dacta}', hinhdaidien = '${poco.hinhdaidien}', tinhtrang = '${poco.tinhtrang}' where masanpham = ${id} RETURNING *`;
 	return db.update(sql);
 }

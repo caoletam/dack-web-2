@@ -94,9 +94,17 @@
                                                         <form action="{{route('product_delete',$rs_product->masanpham)}}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" value="" name="txtDeleteID">
+                                                            <button class="btn btn-danger btn-xs btn-delete">Trạng thái</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{route('product_delete',$rs_product->masanpham)}}" method="post">
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" value="" name="txtDeleteID">
                                                             <button class="btn btn-danger btn-xs btn-delete">Xóa</button>
                                                         </form>
                                                     </td>
+
                                                 </tr>
                                                 @endforeach
                                                 
