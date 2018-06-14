@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 class ProductController extends Controller
 {
     //
@@ -127,8 +129,41 @@ class ProductController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
             $result = curl_exec($ch);
             curl_close($ch);
+            $result_tinhtrang_decode = json_decode($result)[0]->tinhtrang; // trả về mã sản phẩm + tình trạng, nếu tình trạng = 1, -> thêm phiên đấu giá với mã sản phẩm đó
+            $result_masanpham_decode = json_decode($result)[0]->masanpham;
+
+            $createAuction = $this->createAuction($result_masanpham_decode,$result_tinhtrang_decode);
+            // dd($result_masanpham_decode);
             return redirect('admin/product');
         }
         return redirect('admin/product');
+    }
+
+    public function createAuction($id,$status){
+
+        // get thời gian hiện tại trong
+
+        $now = Carbon::now();
+        $now->setTimezone('Asia/Bangkok');
+        $now->addDays(2);
+        // dd($now->toDateTimeString());
+
+        $param_array = array(
+            'masanpham' => $id,
+            'thoigiandau' => $now->toDateTimeString(), //Ngày hiện tại + 2 ngày
+            'giathapnhat' => 1000,
+            'giahientai' => 1000,
+            'maphieuthang' => '1',
+            'matinhtrangphiendaugia' => $status
+        );
+        $param = json_encode($param_array);
+        $url = 'http://localhost:3000/phiendaugia/';
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        dd($result);
     }
 }

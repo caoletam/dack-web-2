@@ -95,7 +95,7 @@
                                                         <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" value="1" name="txtStatus">
-                                                            <button style="width: 88px;" class="btn btn-warning btn-xs btn-delete">Hiện</button>
+                                                            <button style="width: 88px;" class="btn btn-default btn-xs btn-delete">Hiện</button>
                                                         </form>
                                                         @elseif($rs_product->tinhtrang=='1')
                                                         <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">

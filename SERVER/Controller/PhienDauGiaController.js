@@ -43,6 +43,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+	console.log(req.body);
 	PhienDauGia.add(req.body)
 		.then(data => {
 			res.statusCode = 201;
@@ -80,7 +81,7 @@ router.delete('/:id', (req, res) => {
 	}
 });
 
-router.post('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
 	if (req.params.id) {
 		var id = req.params.id;
 
