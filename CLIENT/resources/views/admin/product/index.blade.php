@@ -87,15 +87,24 @@
                                                     <td style="padding-right: 0px; width: 10px;">
                                                         <form action="{{route('product_edit',$rs_product->masanpham)}}" method="get">
                                                             {{ csrf_field() }}
-                                                            <button class="btn btn-warning btn-edit">Sửa</button>
+                                                            <button class="btn btn-info btn-edit">Sửa</button>
                                                         </form>
                                                     </td>
-                                                    <td>
-                                                        <form action="{{route('product_delete',$rs_product->masanpham)}}" method="post">
+                                                    <td style="padding-right: 0px; width: 10px;">
+                                                        @if($rs_product->tinhtrang=='0')
+                                                        <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">
                                                             {{ csrf_field() }}
-                                                            <input type="hidden" value="" name="txtDeleteID">
-                                                            <button class="btn btn-danger btn-xs btn-delete">Trạng thái</button>
+                                                            <input type="hidden" value="1" name="txtStatus">
+                                                            <button style="width: 88px;" class="btn btn-warning btn-xs btn-delete">Hiện</button>
                                                         </form>
+                                                        @elseif($rs_product->tinhtrang=='1')
+                                                        <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" value="0" name="txtStatus">
+                                                            <button style="width: 88px;" class="btn btn-success btn-xs btn-delete">Ẩn</button>
+                                                        </form>
+                                                        @endif
+                                                        
                                                     </td>
                                                     <td>
                                                         <form action="{{route('product_delete',$rs_product->masanpham)}}" method="post">

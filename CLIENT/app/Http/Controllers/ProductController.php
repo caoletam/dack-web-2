@@ -55,7 +55,8 @@ class ProductController extends Controller
                 'tensanpham' => $request->input('txtName'),
                 'maloaisanpham' => $request->input('cbType'),
                 'dacta' => $request->input('txtDescription'),
-                'hinhdaidien' => $request->input('txtLinkAvatar')
+                'hinhdaidien' => $request->input('txtLinkAvatar'),
+                'tinhtrang' => '0'
             );
             $param = json_encode($param_array);
             $url = 'http://localhost:3000/sanpham/';
@@ -77,7 +78,8 @@ class ProductController extends Controller
                 'tensanpham' => $request->input('txtName'),
                 'maloaisanpham' => $request->input('cbType'),
                 'dacta' => $request->input('txtDescription'),
-                'hinhdaidien' => $request->input('txtLinkAvatar')
+                'hinhdaidien' => $request->input('txtLinkAvatar'),
+                'tinhtrang' => '0'
             );
             $param = json_encode($param_array);
             $url = 'http://localhost:3000/sanpham/'.$id;
@@ -106,5 +108,27 @@ class ProductController extends Controller
     		curl_close($ch);
     		return redirect('admin/product');
     	}
+    }
+
+    public function updateStatus(Request $request, $id){
+        if($request->isMethod('post')){
+            // dd($request->all());
+            // dd($request->input('txtStatus'));
+            $param_array = array(
+                'status' => $request->input('txtStatus')
+            );
+            $param = json_encode($param_array);
+            // dd($param);
+            $url = 'http://localhost:3000/sanpham/capnhattrangthai/'.$id;
+            $ch = curl_init($url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            return redirect('admin/product');
+        }
+        return redirect('admin/product');
     }
 }

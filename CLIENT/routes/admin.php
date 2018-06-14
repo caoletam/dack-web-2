@@ -26,6 +26,8 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('/edit/{id}',	'ProductController@update')->where('id','[0-9]+');
 		Route::get('/delete/{id}',	'ProductController@delete')->where('id','[0-9]+')->name('product_delete');
 		Route::post('/delete/{id}',	'ProductController@delete')->where('id','[0-9]+');
+		Route::get('/update/{id}',	'ProductController@updateStatus')->where('id','[0-9]+')->name('product_update');
+		Route::post('/update/{id}',	'ProductController@updateStatus')->where('id','[0-9]+');
 		
 	});
 

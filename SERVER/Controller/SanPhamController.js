@@ -3,6 +3,34 @@ var SanPham = require('../Model/SanPham');
 
 var router = express.Router();
 
+
+router.put('/capnhattrangthai/:id', (req, res) => {
+	console.log(req.body);
+
+
+	if (req.params.id) {
+		var id = req.params.id;
+
+		if (isNaN(id)) {
+			res.statusCode = 400;
+			res.end();
+			return;
+		}
+
+		SanPham.updateStatus(id, req.body).then(data => {
+			res.statusCode = 201;
+			res.json(data.rows);
+		}).catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.json('error');
+		});
+	} else {
+		res.statusCode = 400;
+		res.json('error');
+	}
+});
+
 router.get('/', (req, res) => {
     SanPham.loadAll().then(data => {
         res.json(data.rows);

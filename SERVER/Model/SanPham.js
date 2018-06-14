@@ -1,7 +1,7 @@
 var db = require('../DB/db');
 
 exports.loadAll = function() {
-	var sql = 'select * from sanpham';
+	var sql = 'select * from sanpham order by masanpham asc';
 	return db.load(sql);
 }
 
@@ -24,3 +24,11 @@ exports.update = function(id, poco) {
 	var sql = `update sanpham set tensanpham = '${poco.tensanpham}', maloaisanpham = '${poco.maloaisanpham}', dacta = '${poco.dacta}', hinhdaidien = '${poco.hinhdaidien}', tinhtrang = '${poco.tinhtrang}' where masanpham = ${id} RETURNING *`;
 	return db.update(sql);
 }
+
+exports.updateStatus = function(id, poco) {
+	// console.log($poco);
+	var sql = `update sanpham set tinhtrang = '${poco.status}' where masanpham = ${id} RETURNING *`;
+	console.log(sql);
+	return db.update(sql);
+}
+
