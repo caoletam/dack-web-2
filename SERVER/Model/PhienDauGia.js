@@ -44,3 +44,8 @@ exports.updateStatus = function(id, poco){
 	var sql = `update phiendaugia set matinhtrangphiendaugia = '${poco.status}' where maphiendaugia = ${id} RETURNING *`;
 	return db.update(sql);
 }
+
+exports.updateTime = function(id, poco){
+	var sql = `update phiendaugia set thoigiandau = '${poco.time}' where maphiendaugia = ${id} RETURNING *`;
+	return db.update(sql);
+}
