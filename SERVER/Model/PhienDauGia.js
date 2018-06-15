@@ -1,7 +1,7 @@
 var db = require('../DB/db');
 
 exports.loadAll = function() {
-	var sql = 'select * from phiendaugia';
+	var sql = 'select * from phiendaugia order by maphiendaugia asc';
 	return db.load(sql);
 }
 
@@ -37,5 +37,10 @@ exports.count = function(poco){
 
 exports.getStatusByProductID = function(id) {
 	var sql = `select matinhtrangphiendaugia from phiendaugia where masanpham = ${id}`;
+	return db.update(sql);
+}
+
+exports.updateStatus = function(id, poco){
+	var sql = `update phiendaugia set matinhtrangphiendaugia = '${poco.status}' where maphiendaugia = ${id} RETURNING *`;
 	return db.update(sql);
 }

@@ -5,7 +5,11 @@
 
 @include('admin.layout.nav')
 
+<?php 
 
+use Carbon\Carbon;
+
+?>
 
 
 <div class="content">
@@ -15,7 +19,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-4" >
-                                    <a href="{{route('product-add')}}" class="btn btn-success btn-block" role="button">Thêm sản phẩm mới</a>
+                                    <a href="{{route('image_add')}}" class="btn btn-success btn-block" role="button">Thêm phiên đấu giá mới</a>
                                 </div>
                                 <div class="col-md-8">
                                     <form class="navbar-form">
@@ -33,7 +37,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title ">Danh sách sản phẩm</h4>
+                                    <h4 class="card-title ">Danh sách các phiên đấu giá</h4>
                                     <p class="card-category"> Tất cả</p>
                                 </div>
                                 <div class="card-body">
@@ -44,16 +48,19 @@
                                                     #
                                                 </th>
                                                 <th>
-                                                    Tên sản phẩm
+                                                    Sản phẩm
                                                 </th>
                                                 <th>
-                                                    Loại sản phẩm
+                                                    Thời gian còn
                                                 </th>
                                                 <th>
-                                                    Đặc tả
+                                                    Giá hiện tại
                                                 </th>
                                                 <th>
-                                                    Hình đại diện
+                                                    Mã phiếu thắng
+                                                </th>
+                                                <th>
+                                                    Tình trạng phiên
                                                 </th>
                                                 <th>
                                                     &nbsp;
@@ -63,58 +70,96 @@
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                @foreach($result_decode_product as $key => $rs_product)
+                                                @foreach($listAuction as $key => $la)
                                                 <tr>
                                                     <td>
-                                                        {{$rs_product->masanpham}}
+                                                        {{$la->maphiendaugia}}
                                                     </td>
                                                     <td>
-                                                        {{$rs_product->tensanpham}}
-                                                    </td>
-                                                    <td>
-                                                        @foreach($result_decode_type_of_product as $key => $rs_type_of_product)
-                                                        @if($rs_product->maloaisanpham==$rs_type_of_product->maloaisanpham)
-                                                        {{$rs_type_of_product->tenloaisanpham}}
+                                                        @foreach($listProduct as $key => $lp)
+                                                        @if($la->masanpham==$lp->masanpham)
+                                                        {{$lp->tensanpham}}
                                                         @endif
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        {{$rs_product->dacta}}
+                                                        <?php 
+
+                                                        $now = Carbon::now();
+                                                        $now->setTimezone('Asia/Bangkok');
+                                                        $inputSeconds = strtotime($la->thoigiandau) - strtotime($now);
+
+                                                        if($inputSeconds>0){
+                                                            $secondsInAMinute = 60;
+                                                            $secondsInAnHour  = 60 * $secondsInAMinute;
+                                                            $secondsInADay    = 24 * $secondsInAnHour;
+
+                                                            // extract days
+                                                            $days = floor($inputSeconds / $secondsInADay);
+
+                                                            // extract hours
+                                                            $hourSeconds = $inputSeconds % $secondsInADay;
+                                                            $hours = floor($hourSeconds / $secondsInAnHour);
+
+                                                            // extract minutes
+                                                            $minuteSeconds = $hourSeconds % $secondsInAnHour;
+                                                            $minutes = floor($minuteSeconds / $secondsInAMinute);
+
+                                                            // extract the remaining seconds
+                                                            $remainingSeconds = $minuteSeconds % $secondsInAMinute;
+                                                            $seconds = ceil($remainingSeconds);
+
+                                                            echo $days.' ngày '.$hours.' giờ '.$minutes.' phút '.$seconds.' giây ';
+                                                        }
+                                                        else{
+                                                            echo 'null';
+                                                        }
+                                                        
+
+                                                        ?>
                                                     </td>
                                                     <td>
-                                                        <img style="height: 110px; width: 110px; background-image:url({{$rs_product->hinhdaidien}});background-size: 100%;">
+                                                        {{$la->giahientai}}
+                                                    </td>
+                                                    <td>
+                                                        {{$la->maphieuthang}}
+                                                    </td>
+                                                    <td>
+                                                        @foreach($listAuctionStatus as $key => $las)
+                                                        @if($la->matinhtrangphiendaugia==$las->matinhtrangphiendaugia)
+                                                        {{$las->tentinhtrangphiendaugia}}
+                                                        @endif
+                                                        @endforeach
                                                     </td>
                                                     <td style="padding-right: 0px; width: 10px;">
-                                                        <form action="{{route('product_edit',$rs_product->masanpham)}}" method="get">
+                                                        <form action="{{route('auction_edit',$la->maphiendaugia)}}" method="get">
                                                             {{ csrf_field() }}
                                                             <button class="btn btn-info btn-edit">Sửa</button>
                                                         </form>
                                                     </td>
                                                     <td style="padding-right: 0px; width: 10px;">
-
-                                                        @if($rs_product->tinhtrang=='0')
-                                                        <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">
+                                                        @if($la->matinhtrangphiendaugia=='2')
+                                                        <form action="{{route('auction_update',$la->maphiendaugia)}}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" value="1" name="txtStatus">
-                                                            <button style="width: 88px;" class="btn btn-default btn-xs btn-delete">Hiện</button>
+                                                            <button style="width: 88px;" class="btn btn-default btn-xs btn-delete">HIỆN</button>
                                                         </form>
-                                                        @elseif($rs_product->tinhtrang=='1')
-                                                        <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">
+                                                        @elseif($la->matinhtrangphiendaugia=='1')
+                                                        <form action="{{route('auction_update',$la->maphiendaugia)}}" method="post">
                                                             {{ csrf_field() }}
-                                                            <input type="hidden" value="0" name="txtStatus">
-                                                            <button style="width: 88px;" class="btn btn-success btn-xs btn-delete">Ẩn</button>
+                                                            <input type="hidden" value="2" name="txtStatus">
+                                                            <button style="width: 88px;" class="btn btn-success btn-xs btn-delete">ẨN</button>
                                                         </form>
                                                         @endif
                                                         
                                                     </td>
                                                     <td>
-                                                        <form action="{{route('product_delete',$rs_product->masanpham)}}" method="post">
+                                                        <form action="{{route('auction_delete',$la->maphiendaugia)}}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" value="" name="txtDeleteID">
                                                             <button class="btn btn-danger btn-xs btn-delete">Xóa</button>
                                                         </form>
                                                     </td>
-
                                                 </tr>
                                                 @endforeach
                                                 

@@ -4,6 +4,29 @@ var PhienDauGia = require('../Model/PhienDauGia');
 var router = express.Router();
 
 
+
+router.put('/capnhattinhtrang/:id', (req, res) => {
+	console.log(req.body);
+	var id = req.params.id;
+	if (isNaN(id)) {
+		res.statusCode = 400;
+		res.end();
+		return;
+	}
+
+	PhienDauGia.updateStatus(id,req.body)
+		.then(data => {
+			res.statusCode = 201;
+			res.json(data.rows);
+		})
+		.catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.end();
+		});
+});
+
+
 router.get('/tinhtrangphiendaugia/sanpham/:id', (req, res) => {
 	if (req.params.id) {
 		var id = req.params.id;

@@ -63,6 +63,19 @@ Route::group(['prefix'=>'admin'],function(){
 		
 	});
 
+	Route::group(['prefix'=>'auction'],function(){
+		Route::get('/',				'AuctionController@index')			->name('auction');
+		Route::get('/add',			'AuctionController@create')			->name('auction_add');
+		Route::post('/add',			'AuctionController@create');
+		Route::get('/edit/{id}',	'AuctionController@update')->where('id','[0-9]+')->name('auction_edit');
+		Route::post('/edit/{id}',	'AuctionController@update')->where('id','[0-9]+');
+		Route::get('/delete/{id}',	'AuctionController@delete')->where('id','[0-9]+')->name('auction_delete');
+		Route::post('/delete/{id}',	'AuctionController@delete')->where('id','[0-9]+');
+		Route::get('/update/{id}',	'AuctionController@updateStatus')->where('id','[0-9]+')->name('auction_update');
+		Route::post('/update/{id}',	'AuctionController@updateStatus')->where('id','[0-9]+');
+		
+	});
+
 });
 
 

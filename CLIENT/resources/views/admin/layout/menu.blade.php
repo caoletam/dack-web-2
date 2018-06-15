@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../examples/maps.html">
+                        <a class="nav-link" href="{{route('auction')}}">
                             <i class="material-icons">location_ons</i>
                             <p>Phiên đấu giá</p>
                         </a>
