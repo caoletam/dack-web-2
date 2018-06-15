@@ -100,7 +100,7 @@
                                                         @elseif($rs_product->tinhtrang=='1')
                                                         <form action="{{route('product_update',$rs_product->masanpham)}}" method="post">
                                                             {{ csrf_field() }}
-                                                            <input type="hidden" value="2" name="txtStatus">
+                                                            <input type="hidden" value="0" name="txtStatus">
                                                             <button style="width: 88px;" class="btn btn-success btn-xs btn-delete">Ẩn</button>
                                                         </form>
                                                         @endif

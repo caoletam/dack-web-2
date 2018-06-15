@@ -34,3 +34,8 @@ exports.count = function(poco){
 	var sql = `select count (*) as count from phiendaugia where masanpham = '${poco.masanpham}'`;
 	return db.load(sql);
 }
+
+exports.getStatusByProductID = function(id) {
+	var sql = `select matinhtrangphiendaugia from phiendaugia where masanpham = ${id}`;
+	return db.update(sql);
+}

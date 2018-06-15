@@ -4,7 +4,7 @@
 
 // TEST API
 
-Route::get('/checkExistsAuction',	'ProductController@checkExistsAuction')->name('checkExistsAuction');
+Route::get('/test',	'ProductController@test')->name('getAuctioStatus');
 
 //  CLOSE TEST API
 
