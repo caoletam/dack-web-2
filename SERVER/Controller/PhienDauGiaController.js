@@ -3,6 +3,36 @@ var PhienDauGia = require('../Model/PhienDauGia');
 
 var router = express.Router();
 
+
+router.post('/kiemtratontai', (req, res) => {
+	console.log(req.body);
+	PhienDauGia.count(req.body)
+		.then(data => {
+			res.statusCode = 201;
+			res.json(data.rows);
+		})
+		.catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.end();
+		});
+});
+
+
+router.post('/capnhatphiendaugia', (req, res) => {
+	console.log(req.body);
+	PhienDauGia.updateDeactive(req.body)
+		.then(data => {
+			res.statusCode = 201;
+			res.json(data.rows);
+		})
+		.catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.end();
+		});
+});
+
 router.get('/', (req, res) => {
     PhienDauGia.loadAll().then(data => {
         res.json(data.rows);

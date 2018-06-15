@@ -24,3 +24,13 @@ exports.update = function(id, poco) {
 	var sql = `update phiendaugia set masanpham = '${poco.masanpham}',thoigiandau = '${poco.thoigiandau}',giathapnhat = '${poco.giathapnhat}',giahientai = '${poco.giahientai}',maphieuthang = '${poco.maphieuthang}',matinhtrangphiendaugia = '${poco.matinhtrangphiendaugia}' where maphiendaugia = ${id} RETURNING *`;
 	return db.update(sql);
 }
+
+exports.updateDeactive = function(poco) {
+	var sql = `update phiendaugia set thoigiandau = '${poco.thoigiandau}',giathapnhat = '${poco.giathapnhat}',giahientai = '${poco.giahientai}',maphieuthang = '${poco.maphieuthang}',matinhtrangphiendaugia = '${poco.matinhtrangphiendaugia}' where masanpham = ${poco.masanpham} RETURNING *`;
+	return db.update(sql);
+}
+
+exports.count = function(poco){
+	var sql = `select count (*) as count from phiendaugia where masanpham = '${poco.masanpham}'`;
+	return db.load(sql);
+}

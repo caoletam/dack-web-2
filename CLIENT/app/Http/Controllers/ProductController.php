@@ -116,6 +116,8 @@ class ProductController extends Controller
         if($request->isMethod('post')){
             // dd($request->all());
             // dd($request->input('txtStatus'));
+
+
             $param_array = array(
                 'status' => $request->input('txtStatus')
             );
@@ -143,27 +145,74 @@ class ProductController extends Controller
 
         // get thời gian hiện tại trong
 
+        $default_time = Carbon::now();
+        $default_time->setTimezone('Asia/Bangkok');
+
         $now = Carbon::now();
         $now->setTimezone('Asia/Bangkok');
         $now->addDays(2);
         // dd($now->toDateTimeString());
+        if($status==1){
+            // dd('a');
+            $param_array = array(
+                'masanpham' => $id,
+                'thoigiandau' => $now->toDateTimeString(), //Ngày hiện tại + 2 ngày
+                'giathapnhat' => 1000,
+                'giahientai' => 1000,
+                'maphieuthang' => 0,
+                'matinhtrangphiendaugia' => 1
+            );
+            $param = json_encode($param_array);
+            $url = 'http://localhost:3000/phiendaugia/';
+            $ch = curl_init($url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            // dd($result);
+        }
+        else{
+            $param_array = array(
+                'masanpham' => $id, // ID là mã sản phẩm
+                'thoigiandau' => $default_time->toDateTimeString(), //Ngày hiện tại + 2 ngày
+                'giathapnhat' => 1000,
+                'giahientai' => 1000,
+                'maphieuthang' => 0,
+                'matinhtrangphiendaugia' => 2
+            );
+            $param = json_encode($param_array);
+            // dd($param);
+            $url = 'http://localhost:3000/phiendaugia/capnhatphiendaugia/';
+            $ch = curl_init($url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            // dd('a');
+            // dd($result);
+        }
+    }
 
+
+    // ID này là mã sản phẩm kiểm tra xem trong phiên đấu giá đã tồn tại chưa
+    // Hàm này cần return ra check: nếu = 1 -> đã tồn tại, = 0 -> chưa tồn tại (type int)
+    public function checkExistsAuction($id){
         $param_array = array(
-            'masanpham' => $id,
-            'thoigiandau' => $now->toDateTimeString(), //Ngày hiện tại + 2 ngày
-            'giathapnhat' => 1000,
-            'giahientai' => 1000,
-            'maphieuthang' => '1',
-            'matinhtrangphiendaugia' => $status
+                'masanpham' => $id // ID là mã sản phẩm
         );
+
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phiendaugia/';
+        // dd($param);
+        $url = 'http://localhost:3000/phiendaugia/kiemtratontai/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
         $result = curl_exec($ch);
         curl_close($ch);
-        dd($result);
+        $count = (int) json_decode($result)[0]->count;
+        return $count;
     }
 }

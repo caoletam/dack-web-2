@@ -2,6 +2,16 @@
 
 
 
+// TEST API
+
+Route::get('/checkExistsAuction',	'ProductController@checkExistsAuction')->name('checkExistsAuction');
+
+//  CLOSE TEST API
+
+
+// MAIN
+
+
 Route::group(['prefix'=>'admin'],function(){
 	Route::get('/login',			'AdminController@login')->name('login');
 	Route::post('/login',			'AdminController@login')->name('login');
