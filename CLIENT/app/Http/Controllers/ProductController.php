@@ -279,10 +279,4 @@ class ProductController extends Controller
 
     }
 
-    public function test(){
-        $now = Carbon::now();
-        $now->setTimezone('Asia/Bangkok');
-        $now->addDays(2);
-        dd(gettype($now->toDateTimeString()));
-    }
 }
