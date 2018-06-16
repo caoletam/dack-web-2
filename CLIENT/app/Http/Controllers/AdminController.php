@@ -17,7 +17,6 @@ class AdminController extends Controller
             return view('admin.login'); 
         }
         if ($request->isMethod('POST')) {
-        	// dd($request->all()); 
         	$param_array = array(
 				'txtEmail' => $request->input('txtEmail'),
 				'txtPassword' => $request->input('txtPassword')

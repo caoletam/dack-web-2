@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="txtUserName" class="bmd-label-floating">Tên sản phẩm</label>
+                                        <label for="txtName" class="bmd-label-floating">Tên sản phẩm</label>
                                         <input type="text" class="form-control" id="txtName" name="txtName">
                                     </div>
                                 </div>
