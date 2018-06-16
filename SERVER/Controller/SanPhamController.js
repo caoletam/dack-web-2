@@ -3,6 +3,15 @@ var SanPham = require('../Model/SanPham');
 
 var router = express.Router();
 
+router.get('/danhsachkhongthuocphiendaugia', (req, res) => {
+    SanPham.getItemNotExistsAuction().then(data => {
+        res.json(data.rows);
+    }).catch(err => {
+        console.log(err);
+        res.statusCode = 500;
+        res.end('View error log on console.');
+    });
+});
 
 router.put('/capnhattrangthai/:id', (req, res) => {
 	console.log(req.body);
@@ -71,6 +80,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+	console.log(req);
 	SanPham.add(req.body)
 		.then(data => {
 			res.statusCode = 201;

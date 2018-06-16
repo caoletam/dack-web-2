@@ -11,7 +11,7 @@ exports.load = function(id) {
 }
 
 exports.add = function(poco) {
-	var sql = `insert into sanpham(tensanpham,maloaisanpham,dacta,hinhdaidien) values('${poco.tensanpham}','${poco.maloaisanpham}','${poco.dacta}','${poco.hinhdaidien}',${poco.tinhtrang}) RETURNING *`;
+	var sql = `insert into sanpham(tensanpham,maloaisanpham,dacta,hinhdaidien,tinhtrang) values('${poco.tensanpham}','${poco.maloaisanpham}','${poco.dacta}','${poco.hinhdaidien}',${poco.tinhtrang}) RETURNING *`;
 	return db.insert(sql);
 }
 
@@ -30,5 +30,10 @@ exports.updateStatus = function(id, poco) {
 	var sql = `update sanpham set tinhtrang = '${poco.status}' where masanpham = ${id} RETURNING *`;
 	console.log(sql);
 	return db.update(sql);
+}
+
+exports.getItemNotExistsAuction = function(){
+	var sql = `select * from sanpham sp where not exists (select * from phiendaugia pdg where sp.masanpham = pdg.masanpham)`;
+	return db.load(sql);
 }
 

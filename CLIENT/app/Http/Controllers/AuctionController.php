@@ -17,6 +17,63 @@ class AuctionController extends Controller
     	return view('admin.auction.index')->with('listAuction',$listAuction)->with('listProduct',$listProduct)->with('listAuctionStatus',$listAuctionStatus);
     }
 
+    public function create(Request $request){
+    	if($request->isMethod('post')){
+
+    		$now = Carbon::now();
+	        $now->setTimezone('Asia/Bangkok');
+	        $now->addDays($request->input('txtTime'));
+
+    		$param_array = array(
+                'masanpham' => $request->input('cbName'),
+                'thoigiandau' => $now->toDateTimeString(),
+                'giathapnhat' => $request->input('txtCurrency'),
+                'giahientai' => $request->input('txtCurrency'),
+                'maphieuthang' => 0,
+                'matinhtrangphiendaugia' => '1'
+            );
+            $param = json_encode($param_array);
+            $url = 'http://localhost:3000/phiendaugia/';
+            $ch = curl_init($url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            
+            $id = json_decode($result)[0]->masanpham;
+            $status = json_decode($result)[0]->matinhtrangphiendaugia;
+
+            $this->updateStatusProduct($id,$status);
+            return redirect('admin/auction');
+    	}
+    	$getListProductNotExistAuction = $this->getListProductNotExistAuction();
+    	$getListAuction = $this->getListAuction();
+    	return view('admin.auction.add')->with('getListProductNotExistAuction',$getListProductNotExistAuction)->with('getListAuction',$getListAuction);
+    }
+
+    public function delete(Request $request, $id){
+    	if($request->isMethod('post')){
+
+    		// Cập nhật bảng Product trước đã rồi xóa chứ k xóa mát r lấy đâu ra id nữa mà kiếm
+    		$idProduct = $this->getIDProduct($id);
+    		$this->updateStatusProduct($idProduct,2);
+
+
+    		$url = 'http://localhost:3000/phiendaugia/'.$id;
+    		$ch = curl_init($url);
+    		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+    		$result = curl_exec($ch);
+    		// dd($result);
+    		curl_close($ch);
+
+
+
+    		return redirect('admin/auction');
+    	}
+    }
+
     // $id này là id của phiên đấu giá
     public function updateStatus(Request $request,$id){
     	if($request->isMethod('post')){
@@ -144,6 +201,39 @@ class AuctionController extends Controller
         curl_close($ch);
         $result_decode = (object) json_decode($result);
         // dd($result_decode);
+        return $result_decode;
+    }
+
+    public function getListProductNotExistAuction(){
+    	$url = 'http://localhost:3000/sanpham/danhsachkhongthuocphiendaugia';
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result_decode = (object) json_decode($result);
+        // dd($result_decode);
+        return $result_decode;
+    }
+
+    // Hàm này sẽ get masanpham theo id phiên đấu giá (cần truyền vào id phiên đấu giá)
+    public function getIDProduct($id){
+    	$url = 'http://localhost:3000/phiendaugia/masanpham/sanpham/'.$id;
+    	$ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $idProduct = ((array) json_decode($result))[0]->masanpham;
+        return $idProduct;
+    }
+
+    public function test(){
+    	$url = 'http://localhost:3000/phiendaugia/masanpham/sanpham/27';
+    	$ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result_decode = ((array) json_decode($result))[0]->masanpham;
+        dd($result_decode);
         return $result_decode;
     }
 }

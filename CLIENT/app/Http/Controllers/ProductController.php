@@ -18,7 +18,6 @@ class ProductController extends Controller
 
     public function create(Request $request){
     	if($request->isMethod('post')){
-    		// dd($request->all());
     		$param_array = array(
                 'tensanpham' => $request->input('txtName'),
                 'maloaisanpham' => $request->input('cbType'),

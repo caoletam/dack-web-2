@@ -49,3 +49,9 @@ exports.updateTime = function(id, poco){
 	var sql = `update phiendaugia set thoigiandau = '${poco.time}' where maphiendaugia = ${id} RETURNING *`;
 	return db.update(sql);
 }
+
+exports.getIDProduct = function(id) {
+	var sql = `select masanpham from phiendaugia where maphiendaugia = ${id}`;
+	return db.update(sql);
+}
+

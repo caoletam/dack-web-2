@@ -19,7 +19,7 @@ use Carbon\Carbon;
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-4" >
-                                    <a href="{{route('image_add')}}" class="btn btn-success btn-block" role="button">Thêm phiên đấu giá mới</a>
+                                    <a href="{{route('auction_add')}}" class="btn btn-success btn-block" role="button">Thêm phiên đấu giá mới</a>
                                 </div>
                                 <div class="col-md-8">
                                     <form class="navbar-form">
@@ -52,6 +52,9 @@ use Carbon\Carbon;
                                                 </th>
                                                 <th>
                                                     Thời gian còn
+                                                </th>
+                                                <th>
+                                                    Giá thấp nhất
                                                 </th>
                                                 <th>
                                                     Giá hiện tại
@@ -114,9 +117,10 @@ use Carbon\Carbon;
                                                         else{
                                                             echo 'null';
                                                         }
-                                                        
-
                                                         ?>
+                                                    </td>
+                                                    <td>
+                                                        {{$la->giathapnhat}}
                                                     </td>
                                                     <td>
                                                         {{$la->giahientai}}
