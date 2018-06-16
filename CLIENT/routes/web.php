@@ -13,6 +13,4 @@
 require_once('admin.php');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'UserIndexController@index')->name('index');
