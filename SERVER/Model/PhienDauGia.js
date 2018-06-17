@@ -55,3 +55,8 @@ exports.getIDProduct = function(id) {
 	return db.update(sql);
 }
 
+exports.getAuctionByIDProduct = function(id) {
+	var sql = `select * from phiendaugia where masanpham = ${id}`;
+	return db.load(sql);
+}
+

@@ -37,3 +37,8 @@ exports.getItemNotExistsAuction = function(){
 	return db.load(sql);
 }
 
+exports.getItemByIdType = function(id){
+	var sql = `select * from sanpham where maloaisanpham = ${id} and tinhtrang = '1' order by masanpham asc`;
+	return db.load(sql);
+}
+

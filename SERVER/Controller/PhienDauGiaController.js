@@ -5,7 +5,31 @@ var router = express.Router();
 
 
 
-
+router.get('/masanpham/:id', (req, res) => {
+	if (req.params.id) {
+		var id = req.params.id;
+		if (isNaN(id)) {
+			res.statusCode = 400;
+			res.end();
+			return;
+		}
+		PhienDauGia.getAuctionByIDProduct(id).then(data => {
+			if (Object.keys(data).length > 0) {
+				res.json(data.rows);
+			} else {
+				res.statusCode = 204;
+				res.end();
+            }
+		}).catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.json('error');
+		});
+	} else {
+		res.statusCode = 400;
+		res.json('error');
+	}
+});
 
 router.get('/masanpham/sanpham/:id', (req, res) => {
 	if (req.params.id) {

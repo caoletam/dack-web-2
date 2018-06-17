@@ -8,11 +8,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 <title>DACKShop</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary JavaScript plugins) -->
-<script type='text/javascript' src="js/jquery-1.11.1.min.js"></script>
+<script type='text/javascript' src="../js/jquery-1.11.1.min.js"></script>
 <!-- Custom Theme files -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,11 +23,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
 <!-- start menu -->
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<link href="../css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="../js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-<script src="js/menu_jquery.js"></script>
-<script src="js/simpleCart.min.js"> </script>
+<script src="../js/menu_jquery.js"></script>
+<script src="../js/simpleCart.min.js"> </script>
 </head>
 <body>
 <!-- header_top -->
@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-12">
 				<div class="col-md-6">
 					<div class="logo">
-						<a href="index.html"><img style="heigth: 50px;"  src="images/logo.png" class="img-responsive" alt=""/> </a>
+						<a href="index.html"><img style="heigth: 50px;"  src="../images/logo.png" class="img-responsive" alt=""/> </a>
 					</div>
 				</div>
 				<div class="col-md-6">
