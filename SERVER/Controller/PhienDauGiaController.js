@@ -3,7 +3,90 @@ var PhienDauGia = require('../Model/PhienDauGia');
 
 var router = express.Router();
 
+// router.get('/test/:id', (req, res) => {
+// 	if (req.params.id) {
+// 		var id = req.params.id;
+// 		if (isNaN(id)) {
+// 			res.statusCode = 400;
+// 			res.end();
+// 			return;
+// 		}
+// 		PhienDauGia.getTimeByIDProduct(id).then(data => {
+// 			if (Object.keys(data).length > 0) {
 
+// 				var time = (data.rows[0].thoigiandau - Date.now());
+
+// 				var day = ((new Date(time)).getUTCDay())-4;
+// 				var hour = ((new Date(time)).getUTCHours())-7;
+// 				var minute = (new Date(time)).getMinutes();
+// 				var second = (new Date(time)).getSeconds();
+// 				console.log(day + ' : ' + hour +  ' : ' + minute +  ' : ' +  second);
+
+// 				var result = ({ 
+// 					day: day, 
+// 					hour: hour, 
+// 					minute: minute,
+// 					second: second
+// 				});
+
+// 				res.json(result);
+// 			} else {
+// 				res.statusCode = 204;
+// 				res.end();
+//             }
+// 		}).catch(err => {
+// 			console.log(err);
+// 			res.statusCode = 500;
+// 			res.json('error');
+// 		});
+// 	} else {
+// 		res.statusCode = 400;
+// 		res.json('error');
+// 	}
+// });
+
+router.get('/thoigiandau/masanpham/:id', (req, res) => {
+	if (req.params.id) {
+		var id = req.params.id;
+		if (isNaN(id)) {
+			res.statusCode = 400;
+			res.end();
+			return;
+		}
+		PhienDauGia.getTimeByIDProduct(id).then(data => {
+			if (Object.keys(data).length > 0) {
+
+				var time = (data.rows[0].thoigiandau - Date.now());
+
+				var day = ((new Date(time)).getUTCDay())-4;
+				var hour = ((new Date(time)).getUTCHours())-7;
+				var minute = (new Date(time)).getMinutes();
+				var second = (new Date(time)).getSeconds();
+				console.log(day + ' : ' + hour +  ' : ' + minute +  ' : ' +  second);
+
+				var result = ({ 
+					day: day, 
+					hour: hour, 
+					minute: minute,
+					second: second
+				});
+
+				res.json(result);
+
+			} else {
+				res.statusCode = 204;
+				res.end();
+            }
+		}).catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.json('error');
+		});
+	} else {
+		res.statusCode = 400;
+		res.json('error');
+	}
+});
 
 router.get('/masanpham/:id', (req, res) => {
 	if (req.params.id) {

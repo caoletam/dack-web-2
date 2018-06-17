@@ -60,3 +60,12 @@ exports.getAuctionByIDProduct = function(id) {
 	return db.load(sql);
 }
 
+exports.getTimeByIDProduct = function(id) {
+	var sql = `select thoigiandau from phiendaugia where masanpham = ${id}`;
+	return db.load(sql);
+}
+
+// exports.test = function(id) {
+// 	var sql = `select thoigiandau from phiendaugia where masanpham = ${id}`;
+// 	return db.load(sql);
+// }

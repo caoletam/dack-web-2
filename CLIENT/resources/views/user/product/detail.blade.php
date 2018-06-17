@@ -27,6 +27,12 @@ use Carbon\Carbon;
 						
 						<div class="clearfix"></div>		
 				  </div>
+				  <div>
+				  	<form method="post">
+				  		{{ csrf_field() }}
+				  		<input hidden type="text" id="realtime" value="{{route('detail-realtime',$getProductByID->masanpham)}}" name="realtime">
+				  	</form>
+				  </div>
 				  <div class="desc1 span_3_of_2">
 					<h3>{{$getProductByID->tensanpham}}</h3>
 					<span class="brand">Danh mục: 
@@ -45,37 +51,7 @@ use Carbon\Carbon;
 					<div class="price">
 						<span class="text">Thời gian còn lại: </span>
 						@if($getProductByID->masanpham == $getAuctionByIDProduct->masanpham)
-
-						<?php 
-
-						$now = Carbon::now();
-                        $now->setTimezone('Asia/Bangkok');
-                        $inputSeconds = strtotime($getAuctionByIDProduct->thoigiandau) - strtotime($now);
-
-                        if($inputSeconds>0){
-                            $secondsInAMinute = 60;
-                            $secondsInAnHour  = 60 * $secondsInAMinute;
-                            $secondsInADay    = 24 * $secondsInAnHour;
-
-                            // extract days
-                            $days = floor($inputSeconds / $secondsInADay);
-
-                            // extract hours
-                            $hourSeconds = $inputSeconds % $secondsInADay;
-                            $hours = floor($hourSeconds / $secondsInAnHour);
-
-                            // extract minutes
-                            $minuteSeconds = $hourSeconds % $secondsInAnHour;
-                            $minutes = floor($minuteSeconds / $secondsInAMinute);
-
-                            // extract the remaining seconds
-                            $remainingSeconds = $minuteSeconds % $secondsInAMinute;
-                            $seconds = ceil($remainingSeconds);
-                        }
-
-						?>
-						<span class="price-new">{{$days}} ngày {{$hours}} giờ {{$minutes}} phút {{$seconds}} giây</span>
-
+						<p id="realTime">Đợi 1 chút ..</p>
 						@endif
 					</div>
 					<br>

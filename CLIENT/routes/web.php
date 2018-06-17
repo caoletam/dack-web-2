@@ -21,4 +21,5 @@ Route::group(['prefix'=>'category'],function(){
 
 Route::group(['prefix'=>'detail'],function(){
 	Route::get('/{id}',				'UserDetailController@index')->where('id','[0-9]+')			->name('detail');
+	Route::post('/realtime/{id}',			'UserDetailController@getRealTime')->where('id','[0-9]+') ->name('detail-realtime');
 });
