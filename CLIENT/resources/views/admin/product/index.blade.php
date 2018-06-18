@@ -47,7 +47,7 @@
                                                     Tên sản phẩm
                                                 </th>
                                                 <th>
-                                                    Loại sản phẩm
+                                                    Danh mục
                                                 </th>
                                                 <th>
                                                     Đặc tả

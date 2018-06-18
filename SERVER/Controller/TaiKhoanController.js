@@ -5,6 +5,52 @@ var passwordHashed = require('password-hash');
 
 var router = express.Router();
 
+// GET INFO BY USERNAME
+
+router.post('/thongtin/tenhienthi', (req, res) => {
+	// console.log(req);
+    TaiKhoan.getInfoByUsername(req.body).then(data => {
+        res.json(data.rows);
+    }).catch(err => {
+        console.log(err);
+        res.statusCode = 500;
+        res.end('View error log on console.');
+    });
+});
+
+// GET INFO BY EMAIL
+
+router.post('/thongtin', (req, res) => {
+	console.log(req);
+    TaiKhoan.getInfoByEmail(req.body).then(data => {
+        res.json(data.rows);
+    }).catch(err => {
+        console.log(err);
+        res.statusCode = 500;
+        res.end('View error log on console.');
+    });
+});
+
+
+// KIEM TRA LOGIN
+router.post('/kiemtradangnhap/user', (req, res) => {
+	TaiKhoan.loadAll().then(data => {
+		console.log(req.body);
+		data.rows.forEach(element => {
+			if (element.maloaitaikhoan === 1){
+				if (element.email.toString().trim() === req.body.txtEmail){
+					var match = bcrypt.compareSync(req.body.txtPassword, element.matkhau);
+					if(match===true){
+						res.end('1');
+					}
+				}
+			}
+		});
+		res.end('0');
+	}).catch(err=>{
+		res.end('Lỗi rồi');
+	});
+});
 
 
 // KIEM TRA LOGIN

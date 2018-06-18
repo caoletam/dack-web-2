@@ -45,7 +45,7 @@ use Carbon\Carbon;
 						</a>
 					</span>
 					<br>
-					<span class="code">Giá hiện tại: {{$getAuctionByIDProduct->giahientai}}</span>
+					<span class="code">Giá hiện tại: <?=number_format($getAuctionByIDProduct->giahientai) ?> VNĐ</span>
 					<br>
 					<br>
 					<div class="price">
@@ -55,15 +55,20 @@ use Carbon\Carbon;
 						@endif
 					</div>
 					<br>
-					<div class="det_nav1">
+					<form id="form-auction" method="post" action="{{route('auction-product',$getProductByID->masanpham)}}">
+						{{ csrf_field() }}
+						<div class="det_nav1">
 						<h4>Giá của bạn:</h4>
 							<div class=" sky-form col col-4">
-								<input type="text" name="">
+								<input type="number" name="txtAuction">
 							</div>
-					</div>
-					<div class="btn_form">
-						<a href="checkout.html">ĐẤU GIÁ</a>
-					</div>
+						</div>
+						<div class="btn_form">
+							<a type="submit" onclick="document.getElementById('form-auction').submit()">ĐẤU GIÁ</a>
+						</div>
+						
+					</form>
+					
 					
 			   	 </div>
           	    <div class="clearfix"></div>
@@ -117,4 +122,5 @@ use Carbon\Carbon;
 	<!-- end content -->
 </div>
 </div>
+<script type="text/javascript" src="../detail.js"></script>
 @include('user.layout.footer')

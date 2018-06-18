@@ -55,6 +55,7 @@ exports.insert = function (sql) {
 		if (error) {
 			d.reject(error);
 		} else {
+			// console.log(value);
 			d.resolve(value);
 		}
 

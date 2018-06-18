@@ -1,3 +1,6 @@
+
+
+
 <!--A Design by W3layouts
 Author: W3layout
 Author URL: http://w3layouts.com
@@ -74,15 +77,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="col-md-1" style="padding: 0px; text-align: right;">
 							<a href="register.html"></a>
 						</div>
+						@if(Session::has('checkLogin'))
 						<div class="col-md-2" style="padding: 0px; text-align: right;">
-							<a href="register.html">ĐĂNG KÝ</a>
+							<a href="{{route('user-register')}}">Hi, {{Session::get('name')}}</a>
 						</div>
+						@else
+						<div class="col-md-2" style="padding: 0px; text-align: right;">
+							<a href="{{route('user-register')}}">ĐĂNG KÝ</a>
+						</div>
+						@endif
 						<div class="col-md-1" style="padding: 0px; text-align: right;">
 							<a href="register.html"></a>
 						</div>
+						@if(Session::has('checkLogin'))
 						<div class="col-md-2" style="padding: 0px; text-align: right;">
-							<a href="register.html">ĐĂNG NHẬP</a>
+							<a href="{{route('user-logout')}}">ĐĂNG XUẤT</a>
 						</div>
+						@else
+						<div class="col-md-2" style="padding: 0px; text-align: right;">
+							<a href="{{route('user-login')}}">ĐĂNG NHẬP</a>
+						</div>
+						@endif
 						<div class="col-md-1" style="padding: 0px; text-align: right;">
 							<a href="register.html"></a>
 						</div>

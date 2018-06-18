@@ -45,6 +45,22 @@ var router = express.Router();
 // 	}
 // });
 
+
+router.post('/capnhatphieuthang', (req, res) => {
+	console.log(req.body);
+	PhienDauGia.updateWhenWinner(req.body)
+		.then(data => {
+			res.statusCode = 201;
+			res.json(data.rows);
+		})
+		.catch(err => {
+			console.log(err);
+			res.statusCode = 500;
+			res.end();
+		});
+});
+
+
 router.get('/thoigiandau/masanpham/:id', (req, res) => {
 	if (req.params.id) {
 		var id = req.params.id;
@@ -58,8 +74,8 @@ router.get('/thoigiandau/masanpham/:id', (req, res) => {
 
 				var time = (data.rows[0].thoigiandau - Date.now());
 
-				var day = ((new Date(time)).getUTCDay())-4;
-				var hour = ((new Date(time)).getUTCHours())-7;
+				var day = ((new Date(time)).getUTCDay()-4);
+				var hour = ((new Date(time)).getUTCHours());
 				var minute = (new Date(time)).getMinutes();
 				var second = (new Date(time)).getSeconds();
 				console.log(day + ' : ' + hour +  ' : ' + minute +  ' : ' +  second);

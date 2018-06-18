@@ -4,7 +4,7 @@
 
 // TEST API
 
-Route::get('/test',	'AuctionController@test')->name('getAuctioStatus');
+// Route::get('/test',	'AuctionController@test')->name('getAuctioStatus');
 
 //  CLOSE TEST API
 

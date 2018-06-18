@@ -66,7 +66,7 @@
                                                         {{$rs->tenthamso}}
                                                     </td>
                                                     <td>
-                                                        {{$rs->giatri}}
+                                                        <?=number_format($rs->giatri) ?>
                                                     </td>
                                                     <td style="padding-right: 0px; width: 10px;">
                                                         <form action="{{route('parameter_edit',$rs->mathamso)}}" method="get">

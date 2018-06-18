@@ -120,10 +120,10 @@ use Carbon\Carbon;
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        {{$la->giathapnhat}}
+                                                        <?=number_format($la->giathapnhat) ?> VNĐ
                                                     </td>
                                                     <td>
-                                                        {{$la->giahientai}}
+                                                        <?=number_format($la->giahientai) ?> VNĐ
                                                     </td>
                                                     <td>
                                                         {{$la->maphieuthang}}

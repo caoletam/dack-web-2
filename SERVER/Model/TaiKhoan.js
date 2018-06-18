@@ -25,3 +25,13 @@ exports.update = function(id, poco) {
 	var sql = `update taikhoan set tendangnhap = '${poco.tendangnhap}', matkhau = '${poco.matkhau}', tenhienthi = '${poco.tenhienthi}', email = '${poco.email}', dienthoai = '${poco.dienthoai}', diachi = '${poco.diachi}', maloaitaikhoan = '${poco.maloaitaikhoan}' where mataikhoan = ${id} RETURNING *`;
 	return db.update(sql);
 }
+
+exports.getInfoByEmail = function(poco) {
+	var sql = `select * from taikhoan where email = '${poco.email}'`;
+	return db.load(sql);
+}
+
+exports.getInfoByUsername = function(poco) {
+	var sql = `select * from taikhoan where tenhienthi = '${poco.tenhienthi}'`;
+	return db.load(sql);
+}

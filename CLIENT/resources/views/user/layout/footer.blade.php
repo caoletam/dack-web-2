@@ -58,6 +58,6 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="../detail.js"></script>
+
 </body>
 </html>
