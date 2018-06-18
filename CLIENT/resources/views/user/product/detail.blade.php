@@ -56,12 +56,12 @@ use Carbon\Carbon;
 						{{ csrf_field() }}
 						<div class="det_nav1">
 						<h4>Giá của bạn:</h4>
-							<div class=" sky-form col col-4">
-								<input type="number" name="txtAuction">
+							<div class=" sky-form col col-4 quantity">
+								<input type="number" name="txtAuction" value="{{$getAuctionByIDProduct->giahientai}}" min="{{$getAuctionByIDProduct->giahientai}}" step="100000">
 							</div>
 						</div>
 						<div class="btn_form">
-							<a type="submit" onclick="document.getElementById('form-auction').submit()">ĐẤU GIÁ</a>
+							<a style="margin-left: 50px; margin-top: -100px" type="submit" onclick="document.getElementById('form-auction').submit()">ĐẤU GIÁ</a>
 						</div>
 						
 					</form>
@@ -120,4 +120,5 @@ use Carbon\Carbon;
 </div>
 </div>
 <script type="text/javascript" src="../detail.js"></script>
+<script src="../detail-spinner.js"> </script>
 @include('user.layout.footer')
