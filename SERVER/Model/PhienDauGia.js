@@ -66,7 +66,7 @@ exports.getTimeByIDProduct = function(id) {
 }
 
 exports.updateWhenWinner = function(poco) {
-	var sql = `update phiendaugia set giahientai = '${poco.giahientai}', maphieuthang = '${poco.maphieuthang}' where maphiendaugia = ${poco.maphiendaugia} RETURNING *`;
+	var sql = `update phiendaugia set giahientai = '${poco.giahientai}', maphieuthang = '${poco.maphieuthang}', thoigiandau = '${poco.thoigiandau}' where maphiendaugia = ${poco.maphiendaugia} RETURNING *`;
 	return db.update(sql);
 }
 

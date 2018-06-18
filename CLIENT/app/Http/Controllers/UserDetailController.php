@@ -80,9 +80,10 @@ class UserDetailController extends Controller
     			else{
     				dd('a');
     			}
+    			return redirect()->back();
 
     		}
-    		// return redirect('/login');
+    		return redirect('/login');
     	}
     	// dd(Session::get('name'));
     }
@@ -92,10 +93,15 @@ class UserDetailController extends Controller
     	$currency = $getInfoWinnerCurrentByCouponID->giadau;
     	$coupon_id = $getInfoWinnerCurrentByCouponID->maphieudaugia;
 
+    	$now = Carbon::now();
+        $now->setTimezone('Asia/Bangkok');
+        $now->addDays(2);
+
     	$param_array = array(
             'maphiendaugia' => $auction_id,
             'giahientai' => $currency,
-            'maphieuthang' => $coupon_id
+            'maphieuthang' => $coupon_id,
+            'thoigiandau' => $now->toDateTimeString()
         );
         $param = json_encode($param_array);
         $url = 'http://localhost:3000/phiendaugia/capnhatphieuthang/';

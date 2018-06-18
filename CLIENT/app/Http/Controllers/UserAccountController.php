@@ -34,7 +34,7 @@ class UserAccountController extends Controller
                 Session::put('checkLogin', '1');
                 Session::put('name', $name[0]->tenhienthi);
             }
-            return redirect('/');
+            return redirect()->back()->back();
     	}
     	$getListTypeOfProduct = $this->getListTypeOfProduct();
     	return view('user.user.login')->with('getListTypeOfProduct',$getListTypeOfProduct);
@@ -59,7 +59,7 @@ class UserAccountController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
             $result = curl_exec($ch);
             curl_close($ch);
-            
+
             $name = $this->getInfoUserByEmail($request->input('txtEmail'));
             Session::put('checkLogin', '1');
             Session::put('name', $name[0]->tenhienthi);
@@ -73,7 +73,7 @@ class UserAccountController extends Controller
     public function logout(){
         Session::forget('checkLogin');
         Session::forget('name');
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function getListTypeOfProduct(){

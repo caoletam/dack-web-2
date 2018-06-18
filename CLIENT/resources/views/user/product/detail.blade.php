@@ -20,9 +20,6 @@ use Carbon\Carbon;
 							<div class="col-md-12">
 								<img src="{{$getProductByID->hinhdaidien}}" style="width: 300px; height: 320px; display: inline;">
 							</div>
-							<div class="col-md-4">a</div>
-							<div class="col-md-4">a</div>
-							<div class="col-md-4">a</div>
 						</div>
 						
 						<div class="clearfix"></div>		
