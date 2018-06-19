@@ -11,6 +11,7 @@ use Session;
 class AdminController extends Controller
 {
     //
+
     public function login(Request $request)
     {
         if ($request->isMethod('GET')) {
@@ -22,7 +23,7 @@ class AdminController extends Controller
 				'txtPassword' => $request->input('txtPassword')
 			);
 			$param = json_encode($param_array);
-        	$url = 'http://localhost:3000/taikhoan/kiemtradangnhap';
+        	$url = $this->host.'/taikhoan/kiemtradangnhap';
         	$ch = curl_init($url);
         	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 			curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

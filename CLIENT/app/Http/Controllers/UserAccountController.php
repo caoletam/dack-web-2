@@ -18,7 +18,7 @@ class UserAccountController extends Controller
                 'txtPassword' => $request->input('txtPassword')
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/taikhoan/kiemtradangnhap/user';
+            $url = $this->host.'/taikhoan/kiemtradangnhap/user';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -52,7 +52,7 @@ class UserAccountController extends Controller
                 'maloaitaikhoan' => 1
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/taikhoan/';
+            $url = $this->host.'/taikhoan/';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -77,7 +77,7 @@ class UserAccountController extends Controller
     }
 
     public function getListTypeOfProduct(){
-	    $url = 'http://localhost:3000/loaisanpham/';
+	    $url = $this->host.'/loaisanpham/';
 	    $ch = curl_init($url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	    $result = curl_exec($ch);
@@ -93,7 +93,7 @@ class UserAccountController extends Controller
             'email' => $email
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/taikhoan/thongtin';
+        $url = $this->host.'/taikhoan/thongtin';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

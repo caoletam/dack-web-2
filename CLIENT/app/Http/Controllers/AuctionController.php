@@ -33,7 +33,7 @@ class AuctionController extends Controller
                 'matinhtrangphiendaugia' => '1'
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/phiendaugia/';
+            $url = $this->host.'/phiendaugia/';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -60,7 +60,7 @@ class AuctionController extends Controller
     		$this->updateStatusProduct($idProduct,2);
 
 
-    		$url = 'http://localhost:3000/phiendaugia/'.$id;
+    		$url = $this->host.'/phiendaugia/'.$id;
     		$ch = curl_init($url);
     		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
@@ -82,7 +82,7 @@ class AuctionController extends Controller
                 'status' => $request->input('txtStatus')
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/phiendaugia/capnhattinhtrang/'.$id;
+            $url = $this->host.'/phiendaugia/capnhattinhtrang/'.$id;
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -123,7 +123,7 @@ class AuctionController extends Controller
             'time' => $time
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phiendaugia/capnhatthoigian/'.$id;
+        $url = $this->host.'/phiendaugia/capnhatthoigian/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -150,7 +150,7 @@ class AuctionController extends Controller
             'status' => $status_product
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/sanpham/capnhattrangthai/'.$id;
+        $url = $this->host.'/sanpham/capnhattrangthai/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -161,7 +161,7 @@ class AuctionController extends Controller
     }
 
     public function getListProduct(){
-    	$url = 'http://localhost:3000/sanpham/';
+    	$url = $this->host.'/sanpham/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -172,7 +172,7 @@ class AuctionController extends Controller
     }
 
     public function getListAuction(){
-    	$url = 'http://localhost:3000/phiendaugia/';
+    	$url = $this->host.'/phiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -183,7 +183,7 @@ class AuctionController extends Controller
     }
 
     public function getListCoupon(){
-    	$url = 'http://localhost:3000/phieudaugia/';
+    	$url = $this->host.'/phieudaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -194,7 +194,7 @@ class AuctionController extends Controller
     }
 
     public function getListAuctionStatus(){
-    	$url = 'http://localhost:3000/tinhtrangphiendaugia/';
+    	$url = $this->host.'/tinhtrangphiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -205,7 +205,7 @@ class AuctionController extends Controller
     }
 
     public function getListProductNotExistAuction(){
-    	$url = 'http://localhost:3000/sanpham/danhsachkhongthuocphiendaugia';
+    	$url = $this->host.'/sanpham/danhsachkhongthuocphiendaugia';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -217,7 +217,7 @@ class AuctionController extends Controller
 
     // Hàm này sẽ get masanpham theo id phiên đấu giá (cần truyền vào id phiên đấu giá)
     public function getIDProduct($id){
-    	$url = 'http://localhost:3000/phiendaugia/masanpham/sanpham/'.$id;
+    	$url = $this->host.'/phiendaugia/masanpham/sanpham/'.$id;
     	$ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -227,7 +227,7 @@ class AuctionController extends Controller
     }
 
     public function test(){
-    	$url = 'http://localhost:3000/phiendaugia/masanpham/sanpham/27';
+    	$url = $this->host.'/phiendaugia/masanpham/sanpham/27';
     	$ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);

@@ -9,30 +9,12 @@ use Session;
 
 class UserDetailController extends Controller
 {
+
     public function index($id){
     	$getProductByID = $this->getProductByID($id);
     	$getListTypeOfProduct = $this->getListTypeOfProduct();
     	$getAuctionByIDProduct = $this->getAuctionByIDProduct($id);
     	return view('user.product.detail')->with('getListTypeOfProduct',$getListTypeOfProduct)->with('getProductByID',$getProductByID)->with('getAuctionByIDProduct',$getAuctionByIDProduct);
-    }
-
-    public function test(){
-    	$param_array = array(
-            'giadau' => 200000,
-            'maphieudaugia' => 40
-        );
-        $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/capnhat/giahientai/';
-        $ch = curl_init($url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $result_decode = json_decode($result);
-        dd($result_decode);
-        return $result_decode;
     }
 
     public function auctionProduct(Request $request, $id){
@@ -104,7 +86,7 @@ class UserDetailController extends Controller
             'thoigiandau' => $now->toDateTimeString()
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phiendaugia/capnhatphieuthang/';
+        $url = $host.'/phiendaugia/capnhatphieuthang/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -120,7 +102,7 @@ class UserDetailController extends Controller
 // getWinnerCurrentByAuctionID trả ra mã phiếu thắng trong phiên hiện tại
     public function getInfoWinnerCurrentByCouponID($auction_id){
     	$coupon_id = $this->getWinnerCurrentByAuctionID($auction_id);
-    	$url = 'http://localhost:3000/phieudaugia/'.$coupon_id;
+    	$url = $this->host.'/phieudaugia/'.$coupon_id;
 	    $ch = curl_init($url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	    $result = curl_exec($ch);
@@ -134,7 +116,7 @@ class UserDetailController extends Controller
             'maphiendaugia' => $auction_id
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/soluong/maphieudaugia/';
+        $url = $this->host.'/phieudaugia/soluong/maphieudaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -153,7 +135,7 @@ class UserDetailController extends Controller
             'mataikhoan' => $user_id
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/kiemtratontai/maphieudaugia/';
+        $url = $this->host.'/phieudaugia/kiemtratontai/maphieudaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -171,7 +153,7 @@ class UserDetailController extends Controller
             'maphieudaugia' => $coupon_id
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/capnhat/giahientai/';
+        $url = $this->host.'/phieudaugia/capnhat/giahientai/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -183,7 +165,7 @@ class UserDetailController extends Controller
 
 // Truyền vào ID phiên để tìm ra người chiến thắng hiện tại của phiên này (id là mã phiên)
     public function getWinnerCurrentByAuctionID($auction_id){
-    	$url = 'http://localhost:3000/phieudaugia/nguoichienthang/maphien/'.$auction_id;
+    	$url = $this->host.'/phieudaugia/nguoichienthang/maphien/'.$auction_id;
 	    $ch = curl_init($url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	    $result = curl_exec($ch);
@@ -195,7 +177,7 @@ class UserDetailController extends Controller
 // LẤY ID PHIẾU BẰNG MÃ TÀI KHOẢN
     public function getCouponIDByUserID($user_id){
     	// dd($user_id);
-    	$url = 'http://localhost:3000/phieudaugia/mataikhoan/'.$user_id;
+    	$url = $this->host.'/phieudaugia/mataikhoan/'.$user_id;
 	    $ch = curl_init($url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	    $result = curl_exec($ch);
@@ -211,7 +193,7 @@ class UserDetailController extends Controller
             'tinhtrang' => $status
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/capnhattinhtrang/maphieudaugia/'.$coupon_id;
+        $url = $this->host.'/phieudaugia/capnhattinhtrang/maphieudaugia/'.$coupon_id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -228,7 +210,7 @@ class UserDetailController extends Controller
             'tinhtrang' => $status
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/capnhattinhtrang/maphiendaugia/'.$auction_id;
+        $url = $this->host.'/phieudaugia/capnhattinhtrang/maphiendaugia/'.$auction_id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -252,7 +234,7 @@ class UserDetailController extends Controller
         );
 
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phieudaugia/';
+        $url = $this->host.'/phieudaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -264,7 +246,7 @@ class UserDetailController extends Controller
     }
 
     public function getMaxCurrencyCouponByAuction($aution_id){
-    	$url = 'http://localhost:3000/phieudaugia/giacaonhat/maphien/'.$aution_id;
+    	$url = $this->host.'/phieudaugia/giacaonhat/maphien/'.$aution_id;
 	    $ch = curl_init($url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	    $result = curl_exec($ch);
@@ -282,7 +264,7 @@ class UserDetailController extends Controller
         );
 
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/taikhoan/thongtin/tenhienthi';
+        $url = $this->host.'/taikhoan/thongtin/tenhienthi';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -296,7 +278,7 @@ class UserDetailController extends Controller
 
 
     public function getListTypeOfProduct(){
-	    $url = 'http://localhost:3000/loaisanpham/';
+	    $url = $this->host.'/loaisanpham/';
 	    $ch = curl_init($url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 	    $result = curl_exec($ch);
@@ -307,7 +289,7 @@ class UserDetailController extends Controller
 	}
 
 	public function getProductByID($id){
-    	$url = 'http://localhost:3000/sanpham/'.$id;
+    	$url = $this->host.'/sanpham/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -318,7 +300,7 @@ class UserDetailController extends Controller
     }
 
     public function getAuctionByIDProduct($id){
-    	$url = 'http://localhost:3000/phiendaugia/masanpham/'.$id;
+    	$url = $this->host.'/phiendaugia/masanpham/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -331,7 +313,7 @@ class UserDetailController extends Controller
 
     public function getRealTime($id){
     	
-    	$url = 'http://localhost:3000/phiendaugia/thoigiandau/masanpham/'.$id;
+    	$url = $this->host.'/phiendaugia/thoigiandau/masanpham/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);

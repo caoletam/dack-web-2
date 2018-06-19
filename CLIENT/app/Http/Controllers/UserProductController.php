@@ -17,7 +17,7 @@ class UserProductController extends Controller
     }
 
     public function getListProductByTypeID($id){
-    	$url = 'http://localhost:3000/sanpham/maloaisanpham/'.$id;
+    	$url = $this->host.'/sanpham/maloaisanpham/'.$id;
 		$ch = curl_init($url);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 		$result = curl_exec($ch);
@@ -27,7 +27,7 @@ class UserProductController extends Controller
     }
 
     public function getListTypeOfProduct(){
-        $url = 'http://localhost:3000/loaisanpham/';
+        $url = $this->host.'/loaisanpham/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -38,7 +38,7 @@ class UserProductController extends Controller
     }
 
     public function getListAuction(){
-    	$url = 'http://localhost:3000/phiendaugia/';
+    	$url = $this->host.'/phiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);

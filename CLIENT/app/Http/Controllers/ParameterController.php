@@ -8,7 +8,7 @@ class ParameterController extends Controller
 {
     //
     public function getListParameter(){
-    	$url = 'http://localhost:3000/thamso/';
+    	$url = $this->host.'/thamso/';
     	$ch = curl_init($url);
     	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     	$result = curl_exec($ch);
@@ -19,7 +19,7 @@ class ParameterController extends Controller
     }
 
     public function getParameter($id){
-    	$url = 'http://localhost:3000/thamso/'.$id;
+    	$url = $this->host.'/thamso/'.$id;
     	$ch = curl_init($url);
     	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     	$result = curl_exec($ch);
@@ -44,7 +44,7 @@ class ParameterController extends Controller
                 'giatri' => $request->input('txtValue')
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/thamso/';
+            $url = $this->host.'/thamso/';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -64,7 +64,7 @@ class ParameterController extends Controller
                 'giatri' => floatval($request->input('txtValue'))
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/thamso/'.$id;
+            $url = $this->host.'/thamso/'.$id;
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -81,7 +81,7 @@ class ParameterController extends Controller
 
     public function delete(Request $request, $id){
     	if($request->isMethod('post')){
-    		$url = 'http://localhost:3000/thamso/'.$id;
+    		$url = $this->host.'/thamso/'.$id;
     		$ch = curl_init($url);
     		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");

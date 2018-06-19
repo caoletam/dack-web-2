@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 class ImageController extends Controller
 {
     //
+    
+
     public function getListImage(){
-    	$url = 'http://localhost:3000/hinh/';
+    	$url = $this->host.'/hinh/';
     	$ch = curl_init($url);
     	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     	$result = curl_exec($ch);
@@ -19,7 +21,7 @@ class ImageController extends Controller
     }
 
     public function getListProduct(){
-    	$url = 'http://localhost:3000/sanpham/';
+    	$url = $this->host.'/sanpham/';
     	$ch = curl_init($url);
     	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     	$result = curl_exec($ch);
@@ -30,7 +32,7 @@ class ImageController extends Controller
     }
 
     public function getImage($id){
-    	$url = 'http://localhost:3000/hinh/'.$id;
+    	$url = $this->host.'/hinh/'.$id;
     	$ch = curl_init($url);
     	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     	$result = curl_exec($ch);
@@ -56,7 +58,7 @@ class ImageController extends Controller
                 'masanpham' => $request->input('cbName')
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/hinh/';
+            $url = $this->host.'/hinh/';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -76,7 +78,7 @@ class ImageController extends Controller
                 'masanpham' => $request->input('cbName')
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/hinh/'.$id;
+            $url = $this->host.'/hinh/'.$id;
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -94,7 +96,7 @@ class ImageController extends Controller
 
     public function delete(Request $request, $id){
     	if($request->isMethod('post')){
-    		$url = 'http://localhost:3000/hinh/'.$id;
+    		$url = $this->host.'/hinh/'.$id;
     		$ch = curl_init($url);
     		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");

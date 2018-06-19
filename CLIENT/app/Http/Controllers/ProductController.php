@@ -26,7 +26,7 @@ class ProductController extends Controller
                 'tinhtrang' => '0'
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/sanpham/';
+            $url = $this->host.'/sanpham/';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -49,7 +49,7 @@ class ProductController extends Controller
                 'tinhtrang' => '0'
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/sanpham/'.$id;
+            $url = $this->host.'/sanpham/'.$id;
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
     public function delete(Request $request, $id){
     	if($request->isMethod('post')){
-    		$url = 'http://localhost:3000/sanpham/'.$id;
+    		$url = $this->host.'/sanpham/'.$id;
     		$ch = curl_init($url);
     		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
@@ -78,7 +78,7 @@ class ProductController extends Controller
     }
 
     public function getListProduct(){
-        $url = 'http://localhost:3000/sanpham/';
+        $url = $this->host.'/sanpham/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -89,7 +89,7 @@ class ProductController extends Controller
     }
 
     public function getListTypeOfProduct(){
-        $url = 'http://localhost:3000/loaisanpham/';
+        $url = $this->host.'/loaisanpham/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -100,7 +100,7 @@ class ProductController extends Controller
     }
 
     public function getProduct($id){
-        $url = 'http://localhost:3000/sanpham/'.$id;
+        $url = $this->host.'/sanpham/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -113,7 +113,7 @@ class ProductController extends Controller
     }
 
     public function getListAuction(){
-        $url = 'http://localhost:3000/phiendaugia/';
+        $url = $this->host.'/phiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -134,7 +134,7 @@ class ProductController extends Controller
             );
             $param = json_encode($param_array);
             // dd($param);
-            $url = 'http://localhost:3000/sanpham/capnhattrangthai/'.$id;
+            $url = $this->host.'/sanpham/capnhattrangthai/'.$id;
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -198,7 +198,7 @@ class ProductController extends Controller
 
         $param = json_encode($param_array);
         // dd($param);
-        $url = 'http://localhost:3000/phiendaugia/kiemtratontai/';
+        $url = $this->host.'/phiendaugia/kiemtratontai/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -214,7 +214,7 @@ class ProductController extends Controller
     // Hàm này trả về tình trạng phiên đấu giá 
     public function getAuctioStatus($id){
 
-        $url = 'http://localhost:3000/phiendaugia/tinhtrangphiendaugia/sanpham/'.$id;
+        $url = $this->host.'/phiendaugia/tinhtrangphiendaugia/sanpham/'.$id;
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -255,7 +255,7 @@ class ProductController extends Controller
         );
         $param = json_encode($param_array);
         // dd($param);
-        $url = 'http://localhost:3000/phiendaugia/capnhatphiendaugia/';
+        $url = $this->host.'/phiendaugia/capnhatphiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -280,7 +280,7 @@ class ProductController extends Controller
             'matinhtrangphiendaugia' => 1
         );
         $param = json_encode($param_array);
-        $url = 'http://localhost:3000/phiendaugia/';
+        $url = $this->host.'/phiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));

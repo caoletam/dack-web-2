@@ -15,7 +15,7 @@ class UserIndexController extends Controller
     }
 
     public function getListProduct(){
-    	$url = 'http://localhost:3000/sanpham/';
+    	$url = $this->host.'/sanpham/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -26,7 +26,7 @@ class UserIndexController extends Controller
     }
 
     public function getListAuction(){
-    	$url = 'http://localhost:3000/phiendaugia/';
+    	$url = $this->host.'/phiendaugia/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -37,7 +37,7 @@ class UserIndexController extends Controller
     }
 
     public function getListTypeOfProduct(){
-        $url = 'http://localhost:3000/loaisanpham/';
+        $url = $this->host.'/loaisanpham/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);

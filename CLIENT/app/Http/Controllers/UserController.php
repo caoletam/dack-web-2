@@ -9,7 +9,7 @@ class UserController extends Controller
     //
 
     public function getListUser(){
-        $url = 'http://localhost:3000/taikhoan/';
+        $url = $this->host.'/taikhoan/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -19,7 +19,7 @@ class UserController extends Controller
     }
 
     public function getListTypeOfUser(){
-        $url = 'http://localhost:3000/loaitaikhoan/';
+        $url = $this->host.'/loaitaikhoan/';
         $ch = curl_init($url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $result = curl_exec($ch);
@@ -50,7 +50,7 @@ class UserController extends Controller
                 'matkhau' => $request->input('txtPassword')
             );
             $param = json_encode($param_array);
-            $url = 'http://localhost:3000/taikhoan/';
+            $url = $this->host.'/taikhoan/';
             $ch = curl_init($url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
